@@ -5,15 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <title>Starter</title>
+    <title>Board Game</title>
 </head>
 
 <body>
-    <section class="wrapper">
-        <p id="content">Mon nouveau texte</p>
-        <a id="btn" class="btn btn-color-1 btn-size-1" href="#">mon gros bouton</a>
-    </section>
-    <script src="js/script.js"></script>
+
+    <div id="container">
+        <canvas id="plateau" width="600" height="600"></canvas>
+    </div>
+    
+    <!-- Appel des fichiers JS -->
+    <script src="js/classes/Map.js"></script>
+    <script src="js/classes/Character.js"></script>
+    <script src="js/classes/Game.js"></script>
+    <script src="js/classes/Weapon.js"></script>
+    <script src="js/init.js"></script>
 </body>
 
 </html>
