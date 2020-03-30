@@ -1,0 +1,25 @@
+.container-game {
+
+    // h1 {
+    //     display: flex;
+    //     justify-content: center;
+    //     color:white;
+    //     padding: 2rem 0;
+    //     font-size: 6rem;
+    //     font-family: $font-title;
+    //     background-image: url(../assets/img/background.jpg);
+    //     background-size: cover;
+    //     background-position: center;
+    // }
+
+    .container-canvas {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: calc(100vh - 8.6rem);
+
+        canvas {
+            // box-shadow: 0px 48px 85px rgba(114, 114, 114, 0.5);
+        }
+    }
+}
