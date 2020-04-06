@@ -9,7 +9,7 @@ class Map {
         //On parcours chaque bloc
         for (let i = 0; i < numberBloc; i++) {
             let canvas = new Image();
-            canvas.src = "assets/img/tiles-1.png";
+            canvas.src = "assets/img/tiles-1.jpg";
             
             canvas.addEventListener('load', function () {
                 ctx.drawImage(canvas, listBloc[i].positionX, listBloc[i].positionY);
@@ -17,8 +17,8 @@ class Map {
 
             //On ajoute un objet à chaque bloc
             listBloc[i] = {
-                numerocase: i,
-                id: "casevide",
+                id: i,
+                type: "casevide",
                 positionX: sizeBloc * column + 1,
                 positionY: sizeBloc * line + 1
             };

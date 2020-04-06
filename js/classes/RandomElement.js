@@ -1,60 +1,37 @@
 class RandomElement {
 
-    //Fonction aléatoire
+    // ****** Cette méthode retourne un nombre aléatoire entre 0 et le nombre total de blocs. ******/
     randomNumber() {
         return Math.floor(Math.random() * (numberBloc - 1));
     }
 
-    createObstacle() {
-        //Constante nombre d'obstacles
-        const numberObstacle = 12;
-
-        //Boucle qui parcours les obstacles 
-        for (let i = 0; i < numberObstacle; i++) {
+    // ****** Cette méthode permet de gérer le nombre d'éléments à afficher et le type d'élement (arme, obstacle ou joueur) *****/
+    typeBlock(numberElement, type) {
+        // on instancie une boucle while pour gérer le nombre d'élément
+        let counter = 0;
+        while (counter < numberElement) {
+            // On récupère la méthode randomNumber qu'on stocke dans une constante
             const numberRandomBloc = this.randomNumber();
-            if (listBloc[numberRandomBloc].id !== "casevide") {
-                i--;
-            } else {
-                listBloc[numberRandomBloc].id = "obstacle";
+            // Si l'objet listBloc vaut "casevide" alors la case est vide et le nouvel élément peut être crée
+            if (listBloc[numberRandomBloc].type === "casevide") {
+                listBloc[numberRandomBloc].type = type;
+                counter++;
             }
-        }
-
-        //Vérification de l'id et création du style de la case
-        for (let i = 0; i < numberBloc; i++) {
-            (function (i) {
-                if (listBloc[i].id === "obstacle") {
-                    let canvas = new Image();
-                    canvas.src = "assets/img/tiles-2.png";
-                    canvas.addEventListener('load', function () {
-                        ctx.drawImage(canvas, listBloc[i].positionX, listBloc[i].positionY);
-                    }, false);
-                }
-            })(i);
         }
     }
 
-    createWeapon() {
-        const numberWeapon = 4;
-        for (let i = 0; i < numberWeapon; i++) {
-            const numberWeaponBloc = this.randomNumber();
-            if (listBloc[numberWeaponBloc].id !== "casevide") {
-                i--;
-            } else {
-                listBloc[numberWeaponBloc].id = "arme";
+    drawBlock(type, imageSrc) {
+        for (let i = 0; i < numberBloc; i++) {
+
+            if (listBloc[i].type === type) {
+                let canvas = new Image();
+                canvas.src = imageSrc;
+                canvas.addEventListener('load', function () {
+                    ctx.drawImage(canvas, listBloc[i].positionX, listBloc[i].positionY);
+                }, false);
             }
         }
 
-        for (let i = 0; i < numberBloc; i++) {
-            (function (i) {
-                if (listBloc[i].id === "arme") {
-                    let canvas = new Image();
-                    canvas.src = "assets/img/tiles-3.png";
-                    canvas.addEventListener('load', function () {
-                        ctx.drawImage(canvas, listBloc[i].positionX, listBloc[i].positionY);
-                    }, false);
-                }
-            })(i);
-        }
     }
 
 }
