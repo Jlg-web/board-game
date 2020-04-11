@@ -12,7 +12,7 @@ class Weapon {
     }
 
     describeWeapon() {
-        console.log(`Votre arme est ${this.name} et inflige ${this.damage} points de dégâts.`);
+        // console.log(`Votre arme est ${this.name} et inflige ${this.damage} points de dégâts.`);
     }
 
 }

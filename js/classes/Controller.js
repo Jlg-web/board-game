@@ -3,8 +3,10 @@ class Controller {
     init() {
         const map = new Map();
         const obstacle = new Obstacle();
+
         const player1 = new Player("Chevalier", 50);
-        const player2 = new Player("Ninja", 12);
+        const player2 = new Player("Ninja", 10);
+
         const weapon1 = new Weapon("un lance-pierre", 10);
         const weapon2 = new Weapon("une masse", 20);
         const weapon3 = new Weapon("un arc", 30);
@@ -15,9 +17,12 @@ class Controller {
 
         //Init players
         player1.createPlayer(1);
-        player1.describePlayer()
+        player1.describePlayer();
+        player1.verifPlayerPosition();
+
         player2.createPlayer(2);
         player2.describePlayer();
+        player2.verifPlayerPosition();
 
         //Init weapon
         weapon1.createWeapon(1);

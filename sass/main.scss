@@ -14,7 +14,9 @@
 @import "layouts/footer";
 
 /* Component */
-@import "component/canvas";
+@import "component/board-game";
+@import "component/board-control";
+
 
 /* Pages */
 @import "pages/home";
