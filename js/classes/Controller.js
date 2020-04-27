@@ -18,11 +18,9 @@ class Controller {
         //Init players
         player1.createPlayer(1);
         player1.describePlayer();
-        player1.verifPlayerPosition();
 
         player2.createPlayer(2);
         player2.describePlayer();
-        player2.verifPlayerPosition();
 
         //Init weapon
         weapon1.createWeapon(1);
