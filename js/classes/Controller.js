@@ -5,7 +5,8 @@ class Controller {
         const obstacle = new Obstacle();
 
         const player1 = new Player("Chevalier", 50);
-        const player2 = new Player("Ninja", 10);
+        console.log(player1);
+        // const player2 = new Player("Ninja", 10);
 
         const weapon1 = new Weapon("un lance-pierre", 10);
         const weapon2 = new Weapon("une masse", 20);
@@ -17,10 +18,10 @@ class Controller {
 
         //Init players
         player1.createPlayer(1);
-        player1.describePlayer();
+        // player1.describePlayer();
 
-        player2.createPlayer(2);
-        player2.describePlayer();
+        // player2.createPlayer(2);
+        // player2.describePlayer();
 
         //Init weapon
         weapon1.createWeapon(1);

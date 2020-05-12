@@ -11,17 +11,19 @@
 
 <body>
     <div class="container-game">
-        <!-- <h1>Gotham fight</h1> -->
+
         <div class="container-canvas">
             <canvas id="plateau" width="600" height="600"></canvas>
             <div class="board-control">
                 <h1>Informations de la partie :</h1>
+
                 <div class="player-1">
                     <h2>Joueur 1</h2>
                     <p>Points de vie : <span id="player-point-1">50</span></p>
                     <p>Arme : <span>Arc</span></p>
                     <p class="action-player">Action en cours :<br> <span>Le joueur 1 attaque le joueur 2 et remporte le combat !</span></p>
                 </div>
+
                 <div class="player-2">
                     <h2>Joueur 2</h2>
                     <p>Points de vie : <span id="player-point-2">60</span></p>
@@ -31,6 +33,17 @@
 
             </div>
         </div>
+
+        <div class="containerKeyboard">
+            <button id="btn-left"></button><br><br>
+            <button id="btn-right"></button>
+            <button id="btn-circle">
+                <div></div>
+            </button>
+            <button id="btn-up"></button><br><br>
+            <button id="btn-down"></button>
+        </div>
+
     </div>
 
     <!-- Appel des fichiers JS -->
@@ -40,6 +53,7 @@
     <script src="js/classes/Weapon.js"></script>
     <script src="js/classes/Obstacle.js"></script>
     <script src="js/classes/Player.js"></script>
+    <script src="js/classes/ControlPlayer.js"></script>
     <script src="js/init.js"></script>
 </body>
 
