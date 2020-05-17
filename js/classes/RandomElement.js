@@ -1,11 +1,15 @@
 class RandomElement {
 
+    constructor(length) {
+        this.length = length;
+    }
+
     randomNumber() {
-        return Math.floor(Math.random() * (numberBloc - 1));
+        return Math.floor(Math.random() * (this.length * this.length - 1));
     }
 
     idElement(recupId) {
-        for (let i = 0; i < numberBloc; i++) {
+        for (let i = 0; i < this.length * this.length; i++) {
             if (listBloc[i].type === `${recupId}`) {
                 return (listBloc[i].id);
             }
@@ -15,7 +19,7 @@ class RandomElement {
     typeBlock(numberElement, type) {
         let counter = 0;
         while (counter < numberElement) {
-            const numberRandomBloc = this.randomNumber();
+            const numberRandomBloc = this.randomNumber(this.length);
             if (listBloc[numberRandomBloc].type === "casevide") {
                 listBloc[numberRandomBloc].type = type;
                 counter++;
@@ -24,7 +28,7 @@ class RandomElement {
     }
 
     drawBlock(type, imageSrc) {
-        for (let i = 0; i < numberBloc; i++) {
+        for (let i = 0; i < this.length * this.length; i++) {
             if (listBloc[i].type === type) {
                 let canvas = new Image();
                 canvas.src = imageSrc;

@@ -1,6 +1,8 @@
 class Controller {
 
     init() {
+
+        const length = 10;
         const map = new Map();
         const obstacle = new Obstacle();
 
@@ -14,27 +16,44 @@ class Controller {
         const weapon4 = new Weapon("un pistolet laser", 50);
 
         //Init map
-        map.createMap();
+        map.createMap(length);
 
         //Init players
-        player1.createPlayer(1);
-        // player1.describePlayer();
+        player1.createPlayer(1, length);
+
+        //Déplacement du joueur
+        let btnUp = document.getElementById("btn-up");
+        let btnRight = document.getElementById("btn-right");
+        let btnDown = document.getElementById("btn-down");
+        let btnLeft = document.getElementById("btn-left");
+
+        btnUp.addEventListener("click", function () { 
+            player1.movePlayerUp(length);
+        });
+
+        btnRight.addEventListener("click", function () { 
+            player1.movePlayerRight(length)
+        });
+
+        btnDown.addEventListener("click", function () { 
+            player1.movePlayerDown(length)
+        });
+
+        btnLeft.addEventListener("click", function () { 
+            player1.movePlayerLeft(length)
+        });
+
 
         // player2.createPlayer(2);
-        // player2.describePlayer();
 
         //Init weapon
-        weapon1.createWeapon(1);
-        weapon1.describeWeapon();
-        weapon2.createWeapon(2);
-        weapon2.describeWeapon();
-        weapon3.createWeapon(3);
-        weapon3.describeWeapon();
-        weapon4.createWeapon(4);
-        weapon4.describeWeapon();
+        weapon1.createWeapon(1, length);
+        weapon2.createWeapon(2, length);
+        weapon3.createWeapon(3, length);
+        weapon4.createWeapon(4, length);
 
         //Init obstacles
-        obstacle.createObstacle();
+        obstacle.createObstacle(length);
     }
 
 }

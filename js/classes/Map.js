@@ -1,13 +1,13 @@
 class Map {
 
-    createMap() {
+    createMap(length) {
         ctx.fillStyle = "#2c3334";
         ctx.fillRect(0, 0, widthMax, heightMax);
         let column = 0;
         let line = 0;
 
         //On parcours chaque bloc
-        for (let i = 0; i < numberBloc; i++) {
+        for (let i = 0; i < length * length; i++) {
             let canvas = new Image();
             canvas.src = "assets/img/tiles-1.jpg";
             

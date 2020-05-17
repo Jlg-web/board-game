@@ -6,7 +6,7 @@ const heightMax = canvas.height;
 const sizeBloc = 60;
 const numberBlocWidth = widthMax / sizeBloc;
 const numberBlocHeight = heightMax / sizeBloc;
-const numberBloc = numberBlocWidth * numberBlocHeight;
+// const numberBloc = numberBlocWidth * numberBlocHeight;
 const listBloc = [];
 
 let controller = new Controller();
