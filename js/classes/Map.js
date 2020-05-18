@@ -1,6 +1,7 @@
 class Map {
 
-    createMap(length) {
+    createMap(length, ctx, widthMax, heightMax, sizeBloc, numberBlocWidth, listBloc) {
+
         ctx.fillStyle = "#2c3334";
         ctx.fillRect(0, 0, widthMax, heightMax);
         let column = 0;
@@ -10,7 +11,6 @@ class Map {
         for (let i = 0; i < length * length; i++) {
             let canvas = new Image();
             canvas.src = "assets/img/tiles-1.jpg";
-            
             canvas.addEventListener('load', function () {
                 ctx.drawImage(canvas, listBloc[i].positionX, listBloc[i].positionY);
             }, false);
@@ -30,6 +30,7 @@ class Map {
                 line++;
             }
         }
+
     }
 
 }

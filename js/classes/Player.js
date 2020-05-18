@@ -6,7 +6,7 @@ class Player {
         this.currentId = -1;
     }
 
-    createPlayer(playerNumber, length) {
+    createPlayer(playerNumber, length, ctx) {
 
         let randomElement = new RandomElement(length);
         randomElement.typeBlock(1, `player${playerNumber}`);
@@ -61,10 +61,10 @@ class Player {
         }
 
         // On dessine le joueur
-        randomElement.drawBlock(`player${playerNumber}`, `assets/img/player-${playerNumber}.jpg`);
+        randomElement.drawBlock(`player${playerNumber}`, `assets/img/player-${playerNumber}.jpg`, ctx);
     }
 
-    movePlayerUp(length) {
+    movePlayerUp(length, ctx, designPlayers) {
         let canvas = new Image();
 
         canvas.src = "assets/img/tiles-1.jpg";
@@ -73,11 +73,11 @@ class Player {
         this.currentId -= length;
         console.log("Déplacement vers le haut", this.currentId);
 
-        canvas.src = "assets/img/player-1.jpg";
+        canvas.src = designPlayers;
         ctx.drawImage(canvas, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
     }
 
-    movePlayerRight() {
+    movePlayerRight(ctx, designPlayers) {
         let canvas = new Image();
 
         canvas.src = "assets/img/tiles-1.jpg";
@@ -86,11 +86,11 @@ class Player {
         this.currentId += 1;
         console.log("Déplacement vers la droite", this.currentId);
 
-        canvas.src = "assets/img/player-1.jpg";
+        canvas.src = designPlayers;
         ctx.drawImage(canvas, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
     }
 
-    movePlayerDown(length) {
+    movePlayerDown(length, ctx, designPlayers) {
         let canvas = new Image();
 
         canvas.src = "assets/img/tiles-1.jpg";
@@ -99,11 +99,11 @@ class Player {
         this.currentId += length;
         console.log("Déplacement vers le bas", this.currentId);
 
-        canvas.src = "assets/img/player-1.jpg";
+        canvas.src = designPlayers;
         ctx.drawImage(canvas, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
     }
 
-    movePlayerLeft() {
+    movePlayerLeft(ctx, designPlayers) {
         let canvas = new Image();
 
         canvas.src = "assets/img/tiles-1.jpg";
@@ -112,7 +112,7 @@ class Player {
         this.currentId -= 1;
         console.log("Déplacement vers la gauche", this.currentId);
 
-        canvas.src = "assets/img/player-1.jpg";
+        canvas.src = designPlayers;
         ctx.drawImage(canvas, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
     }
 }
