@@ -6,6 +6,7 @@ class Player {
         this.currentId = -1;
     }
 
+    //CreatePlayer
     createPlayer(playerNumber, length, ctx) {
 
         let randomElement = new RandomElement(length);
@@ -64,19 +65,46 @@ class Player {
         randomElement.drawBlock(`player${playerNumber}`, `assets/img/player-${playerNumber}.jpg`, ctx);
     }
 
+    //MovePlayer
+    // movePlayer(length, ctx, designPlayers) {
+    //     let canvas = new Image();
+
+    //     canvas.src = "assets/img/tiles-1.jpg";
+    //     ctx.drawImage(canvas, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
+
+    //     this.currentId += length;
+    //     console.log("Déplacement ",length, this.currentId);
+
+    //     canvas.src = designPlayers;
+    //     ctx.drawImage(canvas, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
+    // }
+
+    //MovePlayerUp
     movePlayerUp(length, ctx, designPlayers) {
         let canvas = new Image();
-
+    
         canvas.src = "assets/img/tiles-1.jpg";
         ctx.drawImage(canvas, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
 
         this.currentId -= length;
         console.log("Déplacement vers le haut", this.currentId);
 
+        //Si currentId < 0 alors on bloque l'avancé du joueur
+        if (this.currentId < 0 ) {
+            this.currentId += length;
+            console.log("STOP");
+        }
+
+        //Test obstacle
+        if(this.currentId == this.currenIdObstacle) {
+            console.log("STOP");
+        }
+
         canvas.src = designPlayers;
         ctx.drawImage(canvas, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
     }
 
+    //MovePlayerRight
     movePlayerRight(ctx, designPlayers) {
         let canvas = new Image();
 
@@ -86,10 +114,17 @@ class Player {
         this.currentId += 1;
         console.log("Déplacement vers la droite", this.currentId);
 
+        //Si currentId % 10 == 0 alors on bloque l'avancé du joueur
+        if (this.currentId % 10 == 0) {
+            this.currentId -= 1;
+            console.log("STOP");
+        }
+
         canvas.src = designPlayers;
         ctx.drawImage(canvas, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
     }
 
+    //MovePlayerDown
     movePlayerDown(length, ctx, designPlayers) {
         let canvas = new Image();
 
@@ -99,10 +134,17 @@ class Player {
         this.currentId += length;
         console.log("Déplacement vers le bas", this.currentId);
 
+        //Si currentId > length * length (total des cases du plateau) alors on bloque l'avancé du joueur
+        if (this.currentId > length * length) {
+            this.currentId -= length;
+            console.log("STOP");
+        }
+
         canvas.src = designPlayers;
         ctx.drawImage(canvas, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
     }
 
+    //MovePlayerLeft
     movePlayerLeft(ctx, designPlayers) {
         let canvas = new Image();
 
@@ -112,7 +154,24 @@ class Player {
         this.currentId -= 1;
         console.log("Déplacement vers la gauche", this.currentId);
 
+        //currentId % 10 == 9 alors on bloque l'avancé du joueur
+        if (this.currentId % 10 == 9) {
+            this.currentId += 1;
+            console.log("STOP");
+        }
+
         canvas.src = designPlayers;
         ctx.drawImage(canvas, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
     }
 }
+
+
+
+
+
+// test = 49;
+// if (test % 10 - 1 == 9) {
+//     console.log("TRUE")
+// } else {
+//     console.log("FALSE")
+// }

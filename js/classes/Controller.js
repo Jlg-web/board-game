@@ -13,10 +13,11 @@ class Controller {
         const map = new Map();
         map.createMap(length, ctx, widthMax, heightMax, sizeBloc, numberBlocWidth, listBloc);
 
+
+
         //**** INIT PLAYERS *****
         const player1 = new Player("Chevalier", 50);
         const player2 = new Player("Ninja", 10);
-
         player1.createPlayer(1, length, ctx);
         player2.createPlayer(2, length, ctx);
 
@@ -25,7 +26,6 @@ class Controller {
         let btnRight = document.getElementById("btn-right");
         let btnDown = document.getElementById("btn-down");
         let btnLeft = document.getElementById("btn-left");
-
 
         // **** tableau des 2 joueurs ***/
         // players[0] = Joueur 1 (Chevalier)
@@ -40,10 +40,8 @@ class Controller {
         const design1 = "assets/img/player-1.jpg";
         const design2 = "assets/img/player-2.jpg";
         let designPlayers = "";
-
         console.log(designPlayers);
-
-        current_player = (current_player === 0) ? 0 : 1;
+        // current_player = (current_player === 0) ? 0 : 1;
 
         btnUp.addEventListener("click", function () {
             if (current_player == 0) {
@@ -51,8 +49,12 @@ class Controller {
             } else {
                 designPlayers = design2;
             }
+            // players[current_player].movePlayer(-length, ctx, designPlayers);
             players[current_player].movePlayerUp(length, ctx, designPlayers);
-            current_player = (++current_player) % players.length;
+            current_player = (current_player + 1) % players.length;
+            
+            
+            console.log(current_player);
         });
 
         btnRight.addEventListener("click", function () {
@@ -62,7 +64,7 @@ class Controller {
                 designPlayers = design2;
             }
             players[current_player].movePlayerRight(ctx, designPlayers);
-            current_player = (++current_player) % players.length;
+            current_player = (current_player + 1) % players.length;
         });
 
         btnDown.addEventListener("click", function () {
@@ -72,7 +74,7 @@ class Controller {
                 designPlayers = design2;
             }
             players[current_player].movePlayerDown(length, ctx, designPlayers);
-            current_player = (++current_player) % players.length;
+            current_player = (current_player + 1) % players.length;
         });
 
         btnLeft.addEventListener("click", function () {
@@ -82,9 +84,8 @@ class Controller {
                 designPlayers = design2;
             }
             players[current_player].movePlayerLeft(ctx, designPlayers);
-            current_player = (++current_player) % players.length;
+            current_player = (current_player + 1) % players.length;
         });
-
 
         //INIT WEAPON
         const weapon1 = new Weapon("un lance-pierre", 10);
@@ -96,9 +97,21 @@ class Controller {
         weapon3.createWeapon(3, length, ctx);
         weapon4.createWeapon(4, length, ctx);
 
-
         //Init obstacles
-        const obstacle = new Obstacle();
-        obstacle.createObstacle(length, ctx);
+        // const obstacle = new Obstacle();
+        // obstacle.createObstacle(length, ctx);
+        const obstacle1 = new Obstacle();
+        const obstacle2 = new Obstacle();
+        const obstacle3 = new Obstacle();
+        const obstacle4 = new Obstacle();
+        const obstacle5 = new Obstacle();
+        const obstacle6 = new Obstacle();
+        obstacle1.createObstacle(1, length, ctx);
+        obstacle2.createObstacle(2, length, ctx);
+        obstacle3.createObstacle(3, length, ctx);
+        obstacle4.createObstacle(4, length, ctx);
+        obstacle5.createObstacle(5, length, ctx);
+        obstacle6.createObstacle(6, length, ctx);
+
     }
 }

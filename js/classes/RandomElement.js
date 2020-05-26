@@ -20,7 +20,6 @@ class RandomElement {
 
     typeBlock(numberElement, type) {
         let counter = 0;
-
         while (counter < numberElement) {
             const numberRandomBloc = this.randomNumber(this.length);
 
@@ -29,7 +28,6 @@ class RandomElement {
                 counter++;
             }
         }
-        
     }
 
     drawBlock(type, imageSrc, ctx) {
