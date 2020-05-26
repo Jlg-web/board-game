@@ -98,20 +98,7 @@ class Controller {
         weapon4.createWeapon(4, length, ctx);
 
         //Init obstacles
-        // const obstacle = new Obstacle();
-        // obstacle.createObstacle(length, ctx);
-        const obstacle1 = new Obstacle();
-        const obstacle2 = new Obstacle();
-        const obstacle3 = new Obstacle();
-        const obstacle4 = new Obstacle();
-        const obstacle5 = new Obstacle();
-        const obstacle6 = new Obstacle();
-        obstacle1.createObstacle(1, length, ctx);
-        obstacle2.createObstacle(2, length, ctx);
-        obstacle3.createObstacle(3, length, ctx);
-        obstacle4.createObstacle(4, length, ctx);
-        obstacle5.createObstacle(5, length, ctx);
-        obstacle6.createObstacle(6, length, ctx);
-
+        const obstacle = new Obstacle();
+        obstacle.createObstacle(length, ctx);
     }
 }

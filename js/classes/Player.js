@@ -79,8 +79,18 @@ class Player {
     //     ctx.drawImage(canvas, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
     // }
 
+
+
+
     //MovePlayerUp
     movePlayerUp(length, ctx, designPlayers) {
+
+        //Si currentId < 0 alors on bloque l'avancé du joueur
+        if (this.currentId - length < 0 || listBloc[this.currentId - length].type === "obstacle") {
+            console.log("STOP");
+            return;
+        }
+
         let canvas = new Image();
     
         canvas.src = "assets/img/tiles-1.jpg";
@@ -89,23 +99,19 @@ class Player {
         this.currentId -= length;
         console.log("Déplacement vers le haut", this.currentId);
 
-        //Si currentId < 0 alors on bloque l'avancé du joueur
-        if (this.currentId < 0 ) {
-            this.currentId += length;
-            console.log("STOP");
-        }
-
-        //Test obstacle
-        if(this.currentId == this.currenIdObstacle) {
-            console.log("STOP");
-        }
-
         canvas.src = designPlayers;
         ctx.drawImage(canvas, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
     }
 
     //MovePlayerRight
     movePlayerRight(ctx, designPlayers) {
+
+        //Si currentId % 10 == 0 alors on bloque l'avancé du joueur
+        if ((this.currentId + 1) % 10 === 0 || listBloc[this.currentId + 1].type === "obstacle") {
+            console.log("STOP");
+            return;
+        }
+
         let canvas = new Image();
 
         canvas.src = "assets/img/tiles-1.jpg";
@@ -114,18 +120,19 @@ class Player {
         this.currentId += 1;
         console.log("Déplacement vers la droite", this.currentId);
 
-        //Si currentId % 10 == 0 alors on bloque l'avancé du joueur
-        if (this.currentId % 10 == 0) {
-            this.currentId -= 1;
-            console.log("STOP");
-        }
-
         canvas.src = designPlayers;
         ctx.drawImage(canvas, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
     }
 
     //MovePlayerDown
     movePlayerDown(length, ctx, designPlayers) {
+
+        //Si currentId > length * length (total des cases du plateau) alors on bloque l'avancé du joueur
+        if (this.currentId + length > length * length || listBloc[this.currentId + length].type === "obstacle") {
+            console.log("STOP");
+            return;
+        }
+
         let canvas = new Image();
 
         canvas.src = "assets/img/tiles-1.jpg";
@@ -134,11 +141,6 @@ class Player {
         this.currentId += length;
         console.log("Déplacement vers le bas", this.currentId);
 
-        //Si currentId > length * length (total des cases du plateau) alors on bloque l'avancé du joueur
-        if (this.currentId > length * length) {
-            this.currentId -= length;
-            console.log("STOP");
-        }
 
         canvas.src = designPlayers;
         ctx.drawImage(canvas, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
@@ -146,6 +148,13 @@ class Player {
 
     //MovePlayerLeft
     movePlayerLeft(ctx, designPlayers) {
+
+        //currentId % 10 == 9 alors on bloque l'avancé du joueur
+        if (this.currentId === 0 || (this.currentId - 1) % 10 === 9 || listBloc[this.currentId - 1].type === "obstacle") {
+            console.log("STOP");
+            return;
+        }
+
         let canvas = new Image();
 
         canvas.src = "assets/img/tiles-1.jpg";
@@ -154,20 +163,10 @@ class Player {
         this.currentId -= 1;
         console.log("Déplacement vers la gauche", this.currentId);
 
-        //currentId % 10 == 9 alors on bloque l'avancé du joueur
-        if (this.currentId % 10 == 9) {
-            this.currentId += 1;
-            console.log("STOP");
-        }
-
         canvas.src = designPlayers;
         ctx.drawImage(canvas, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
     }
 }
-
-
-
-
 
 // test = 49;
 // if (test % 10 - 1 == 9) {
