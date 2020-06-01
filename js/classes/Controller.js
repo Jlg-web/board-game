@@ -3,21 +3,30 @@ class Controller {
     init() {
         const canvas = document.getElementById('plateau');
         const ctx = canvas.getContext('2d');
+
         const widthMax = canvas.width;
         const heightMax = canvas.height;
         const sizeBloc = 60;
         const numberBlocWidth = widthMax / sizeBloc;
         const length = 10;
 
-        //**** INIT MAP ******
-        const map = new Map();
-        map.createMap(length, ctx, widthMax, heightMax, sizeBloc, numberBlocWidth, listBloc);
-
-
+        //***** INIT MAP ******
+        const map = new Map(length, ctx, widthMax, heightMax, sizeBloc, numberBlocWidth);
+        map.createMap();
+    
+        //***** INIT WEAPON *****
+        const weapon1 = new Weapon(length, ctx, 1, "Lance-pierre", 10);
+        const weapon2 = new Weapon(length, ctx, 2, "Masse", 20);
+        const weapon3 = new Weapon(length, ctx, 3, "Arc", 30);
+        const weapon4 = new Weapon(length, ctx, 4, "Pistolet laser", 50);
+        weapon1.createWeapon();
+        weapon2.createWeapon();
+        weapon3.createWeapon();
+        weapon4.createWeapon();
 
         //**** INIT PLAYERS *****
-        const player1 = new Player("Chevalier", 50);
-        const player2 = new Player("Ninja", 10);
+        const player1 = new Player("Chevalier", weapon1);
+        const player2 = new Player("Ninja", weapon1);
         player1.createPlayer(1, length, ctx);
         player2.createPlayer(2, length, ctx);
 
@@ -37,11 +46,10 @@ class Controller {
 
         //Joueur courant
         let current_player = 0;
+        let designPlayers = "";
         const design1 = "assets/img/player-1.jpg";
         const design2 = "assets/img/player-2.jpg";
-        let designPlayers = "";
         console.log(designPlayers);
-        // current_player = (current_player === 0) ? 0 : 1;
 
         btnUp.addEventListener("click", function () {
             if (current_player == 0) {
@@ -50,11 +58,10 @@ class Controller {
                 designPlayers = design2;
             }
             // players[current_player].movePlayer(-length, ctx, designPlayers);
-            players[current_player].movePlayerUp(length, ctx, designPlayers);
+            players[current_player].movePlayerUp(length, ctx, designPlayers, recupNewWeapon);
             current_player = (current_player + 1) % players.length;
-            
-            
             console.log(current_player);
+            
         });
 
         btnRight.addEventListener("click", function () {
@@ -87,18 +94,8 @@ class Controller {
             current_player = (current_player + 1) % players.length;
         });
 
-        //INIT WEAPON
-        const weapon1 = new Weapon("un lance-pierre", 10);
-        const weapon2 = new Weapon("une masse", 20);
-        const weapon3 = new Weapon("un arc", 30);
-        const weapon4 = new Weapon("un pistolet laser", 50);
-        weapon1.createWeapon(1, length, ctx);
-        weapon2.createWeapon(2, length, ctx);
-        weapon3.createWeapon(3, length, ctx);
-        weapon4.createWeapon(4, length, ctx);
-
         //Init obstacles
-        const obstacle = new Obstacle();
-        obstacle.createObstacle(length, ctx);
+        const obstacle = new Obstacle(length, ctx);
+        obstacle.createObstacle();
     }
 }

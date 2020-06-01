@@ -1,0 +1,31 @@
+Pour la récupération des armes
+
+- Dans constrcuctor player.js :
+
+this.currentWeapon = 10;
+this.previousWeapon = "";
+
+on change le current weapon à la récuperation de l'arme
+
+Le joueur tombe sur une case avec une arme -> changement currentWeapon 
+
+
+// Récupération de l'élément du dessus
+if(listBloc[this.currentId - length].type.includes("weapon")) 
+
+
+
+1- Le joueur possède une arme (arme par défaut: lance-pierre, 10 points de dégâts)
+
+2- LE JOUEUR SE TROUVE SUR UNE CASE ARME : l'arme actuelle du joueur est remplacée par l'arme présente sur la case (changement "currentWeapon")
+
+3- LE JOUEUR QUITTE LA CASE ARME : l'arme sur la case est remplacé par l'arme précédente du joueur (changement "previousWeapon")
+
+
+____________________________________________________________
+
+Pour le deplacement des joueurs de 1 à 3 cases
+
+bouton
+Si le joueur veut se déplacer d'une ou deux case, il clique sur le bouton pour passer au joueur suivant
+sinon après 3 mouvement sur un axe, on passe automatiquement au joueur suivant

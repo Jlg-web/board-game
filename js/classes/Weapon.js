@@ -1,14 +1,19 @@
 class Weapon {
 
-    constructor(name, damage) {
+    constructor(length, ctx, weaponNumber, name, damage) {
+
+        this.length = length;
+        this.ctx = ctx
+        this.weaponNumber = weaponNumber;
         this.name = name;
         this.damage = damage;
+
     }
 
-    createWeapon(weaponNumber, length, ctx) {
-        let randomElement = new RandomElement(length);
-        randomElement.typeBlock(1, `weapon${weaponNumber}`);
-        randomElement.drawBlock(`weapon${weaponNumber}`, `assets/img/weapon-${weaponNumber}.png`, ctx);
+    createWeapon() {
+        let randomElement = new RandomElement(this.length);
+        randomElement.typeBlock(1, `weapon${this.weaponNumber}`);
+        randomElement.drawBlock(`weapon${this.weaponNumber}`, `assets/img/weapon-${this.weaponNumber}.png`, this.ctx);
     }
 
 }

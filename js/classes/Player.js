@@ -1,8 +1,11 @@
 class Player {
 
-    constructor(name, level) {
+    constructor(name, playerCurrentWeapon) {
         this.name = name;
-        this.level = level;
+        this.playerCurrentWeapon = playerCurrentWeapon;
+        this.previousWeapon = "";
+
+        this.level = 10;
         this.currentId = -1;
     }
 
@@ -83,12 +86,43 @@ class Player {
 
 
     //MovePlayerUp
-    movePlayerUp(length, ctx, designPlayers) {
+    movePlayerUp(length, ctx, designPlayers, recupNewWeapon) {
 
         //Si currentId < 0 alors on bloque l'avancé du joueur
         if (this.currentId - length < 0 || listBloc[this.currentId - length].type === "obstacle") {
             console.log("STOP");
             return;
+        }
+
+        //Vérification arme
+        if(listBloc[this.currentId - length].type.includes("weapon")) {
+            // console.log("CASE ARME UP");
+
+            this.previousWeapon = this.playerCurrentWeapon;
+
+            if(listBloc[this.currentId - length].type === "weapon1") {
+                console.log("LANCE-PIERRE");
+                this.playerCurrentWeapon = recupNewWeapon;
+            }
+
+            if(listBloc[this.currentId - length].type === "weapon2") {
+                console.log("MASSE");
+                // this.playerCurrentWeapon = newWeapon;
+            }
+
+
+            if(listBloc[this.currentId - length].type === "weapon3") {
+                console.log("ARC");
+                // this.playerCurrentWeapon = newWeapon;
+
+            }
+
+            if(listBloc[this.currentId - length].type === "weapon4") {
+                console.log("PISTOLET LASER");
+                // this.playerCurrentWeapon = newWeapon;
+
+            }
+
         }
 
         let canvas = new Image();
@@ -101,6 +135,7 @@ class Player {
 
         canvas.src = designPlayers;
         ctx.drawImage(canvas, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
+
     }
 
     //MovePlayerRight
@@ -110,6 +145,11 @@ class Player {
         if ((this.currentId + 1) % 10 === 0 || listBloc[this.currentId + 1].type === "obstacle") {
             console.log("STOP");
             return;
+        }
+
+        //Vérification arme
+        if(listBloc[this.currentId + 1].type.includes("weapon")) {
+            console.log("CASE ARME RIGHT");
         }
 
         let canvas = new Image();
@@ -131,6 +171,11 @@ class Player {
         if (this.currentId + length > length * length || listBloc[this.currentId + length].type === "obstacle") {
             console.log("STOP");
             return;
+        }
+
+        //Vérification arme
+        if(listBloc[this.currentId + length].type.includes("weapon")) {
+            console.log("CASE ARME DOWN");
         }
 
         let canvas = new Image();
@@ -155,6 +200,11 @@ class Player {
             return;
         }
 
+        //Vérification arme
+        if(listBloc[this.currentId - 1].type.includes("weapon")) {
+            console.log("CASE ARME LEFT");
+        }
+
         let canvas = new Image();
 
         canvas.src = "assets/img/tiles-1.jpg";
@@ -167,10 +217,3 @@ class Player {
         ctx.drawImage(canvas, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
     }
 }
-
-// test = 49;
-// if (test % 10 - 1 == 9) {
-//     console.log("TRUE")
-// } else {
-//     console.log("FALSE")
-// }

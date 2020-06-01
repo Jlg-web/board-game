@@ -1,36 +1,49 @@
 class Map {
 
-    createMap(length, ctx, widthMax, heightMax, sizeBloc, numberBlocWidth, listBloc) {
+    constructor(length, ctx, widthMax, heightMax, sizeBloc, numberBlocWidth) {
 
-        ctx.fillStyle = "#2c3334";
-        ctx.fillRect(0, 0, widthMax, heightMax);
-        let column = 0;
-        let line = 0;
+        this.length = length;
+        this.ctx = ctx;
+        this.widthMax = widthMax;
+        this.heightMax = heightMax;
+        this.sizeBloc = sizeBloc;
+        this.numberBlocWidth = numberBlocWidth;
+        this.column = 0;
+        this.line = 0;
+        
+    }
 
+    //Création MAP
+    createMap() {
+        //utilisation du contexte canvas
+        this.ctx.fillStyle = "#2c3334";
+        this.ctx.fillRect(0, 0, this.widthMax, this.heightMax);
+        
         //On parcours chaque bloc
-        for (let i = 0; i < length * length; i++) {
-            let canvas = new Image();
-            canvas.src = "assets/img/tiles-1.jpg";
-            canvas.addEventListener('load', function () {
-                ctx.drawImage(canvas, listBloc[i].positionX, listBloc[i].positionY);
-            }, false);
+        for (let i = 0; i < this.length * this.length; i++) {
+
+            let self = this;
+            let img = new Image();
+            img.src = "assets/img/tiles-1.jpg";
+
+            img.onload = function() {
+                self.ctx.drawImage(img, listBloc[i].positionX, listBloc[i].positionY);
+            };
 
             //On ajoute un objet à chaque bloc
             listBloc[i] = {
                 id: i,
                 type: "casevide",
-                positionX: sizeBloc * column + 1,
-                positionY: sizeBloc * line + 1
+                positionX: this.sizeBloc * this.column + 1,
+                positionY: this.sizeBloc * this.line + 1
             };
-            column++;
+            this.column++;
 
             //On passe à la ligne suivante une fois arrivé à 10 cases
-            if (column === numberBlocWidth) {
-                column = 0;
-                line++;
+            if (this.column === this.numberBlocWidth) {
+                this.column = 0;
+                this.line++;
             }
         }
-
     }
-
 }
