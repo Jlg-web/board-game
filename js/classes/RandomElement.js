@@ -10,11 +10,9 @@ class RandomElement {
 
     idElement(recupId) {
         for (let i = 0; i < this.length * this.length; i++) {
-
             if (listBloc[i].type === `${recupId}`) {
                 return (listBloc[i].id);
             }
-
         }
     }
 

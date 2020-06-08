@@ -1,14 +1,14 @@
 class Player {
 
-    constructor(name, playerCurrentWeapon) {
+    constructor(name) {
         this.name = name;
-        this.playerCurrentWeapon = playerCurrentWeapon;
-        this.previousWeapon = "";
-
+        this.currentWeapon = 1;
+        this.previousWeapon = -1;
         this.level = 10;
         this.currentId = -1;
     }
 
+    /******  CREATION DES JOUEURS *******/
     //CreatePlayer
     createPlayer(playerNumber, length, ctx) {
 
@@ -68,78 +68,82 @@ class Player {
         randomElement.drawBlock(`player${playerNumber}`, `assets/img/player-${playerNumber}.jpg`, ctx);
     }
 
-    //MovePlayer
-    // movePlayer(length, ctx, designPlayers) {
-    //     let canvas = new Image();
-
-    //     canvas.src = "assets/img/tiles-1.jpg";
-    //     ctx.drawImage(canvas, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
-
-    //     this.currentId += length;
-    //     console.log("Déplacement ",length, this.currentId);
-
-    //     canvas.src = designPlayers;
-    //     ctx.drawImage(canvas, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
-    // }
-
-
-
-
+    /******  MOUVEMENT DES JOUEURS *******/
     //MovePlayerUp
-    movePlayerUp(length, ctx, designPlayers, recupNewWeapon) {
+    movePlayerUp(length, ctx, designPlayers) {
 
-        //Si currentId < 0 alors on bloque l'avancé du joueur
+        /*********************************************************
+        /***** BLOQUAGE DU JOUEUR DANS CERTAINES CONDITIONS *****/
+        /*********************************************************/
+
         if (this.currentId - length < 0 || listBloc[this.currentId - length].type === "obstacle") {
-            console.log("STOP");
             return;
         }
 
-        //Vérification arme
-        if(listBloc[this.currentId - length].type.includes("weapon")) {
-            // console.log("CASE ARME UP");
+        /**************************************************************************
+        /***** 1 - CREATION D'UNE CASE DE BASE DU PLATEAU LORS DU DÉPLACEMENT *****/
+        /**************************************************************************/
 
-            this.previousWeapon = this.playerCurrentWeapon;
+        let image = new Image();
+        image.src = "assets/img/tiles-1.jpg";
+        ctx.drawImage(image, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
 
-            if(listBloc[this.currentId - length].type === "weapon1") {
-                console.log("LANCE-PIERRE");
-                this.playerCurrentWeapon = recupNewWeapon;
-            }
+        /****************************************************************************************
+        /***** 2 - PERMET DE DEPOSER L'ARME PRECEDENTE DU JOUEUR QUAND IL SORT DE LA CASE ARME  *****/
+        /****************************************************************************************/
 
-            if(listBloc[this.currentId - length].type === "weapon2") {
-                console.log("MASSE");
-                // this.playerCurrentWeapon = newWeapon;
-            }
-
-
-            if(listBloc[this.currentId - length].type === "weapon3") {
-                console.log("ARC");
-                // this.playerCurrentWeapon = newWeapon;
-
-            }
-
-            if(listBloc[this.currentId - length].type === "weapon4") {
-                console.log("PISTOLET LASER");
-                // this.playerCurrentWeapon = newWeapon;
-
-            }
-
+        if (this.previousWeapon !== -1) {
+            image.src = `assets/img/weapon-${this.previousWeapon}.png`;
+            ctx.drawImage(image, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
+            listBloc[this.currentId].type = `weapon${this.previousWeapon}`;
+            this.previousWeapon = -1;
         }
 
-        let canvas = new Image();
-    
-        canvas.src = "assets/img/tiles-1.jpg";
-        ctx.drawImage(canvas, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
+        /****************************************************************
+        /***** PERMET DE FAIRE DES VERIFICATIONS SUR LE TYPE D'ARME *****/
+        /****************************************************************/
 
-        this.currentId -= length;
-        console.log("Déplacement vers le haut", this.currentId);
+        if (listBloc[this.currentId - length].type.includes("weapon")) {
 
-        canvas.src = designPlayers;
-        ctx.drawImage(canvas, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
+            this.previousWeapon = this.currentWeapon;
+
+            if (listBloc[this.currentId - length].type === "weapon1") {
+                this.currentWeapon = 1;
+            }
+
+            if (listBloc[this.currentId - length].type === "weapon2") {
+                this.currentWeapon = 2;
+            }
+
+            if (listBloc[this.currentId - length].type === "weapon3") {
+                this.currentWeapon = 3;
+            }
+
+            if (listBloc[this.currentId - length].type === "weapon4") {
+                this.currentWeapon = 4;
+            }
+        }
+
+        /***********************************************************************************************************
+        /***** ACTION DE DEPLACEMENT DU JOUEUR VERS LE HAUT, CREATION D'UNE IMAGE PLAYER A CHAQUE DEPLACEMENT *****/
+        /**********************************************************************************************************/
+
+        if(this.currentId == this.currentId - length * 3) {
+            console.log('test')
+        }
+        this.currentId = this.currentId - length;
+
+        image.src = designPlayers;
+        ctx.drawImage(image, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
 
     }
 
     //MovePlayerRight
     movePlayerRight(ctx, designPlayers) {
+
+        /*********************************************************
+        /***** BLOQUAGE DU JOUEUR DANS CERTAINES CONDITIONS *****/
+        /*********************************************************/
 
         //Si currentId % 10 == 0 alors on bloque l'avancé du joueur
         if ((this.currentId + 1) % 10 === 0 || listBloc[this.currentId + 1].type === "obstacle") {
@@ -147,25 +151,66 @@ class Player {
             return;
         }
 
-        //Vérification arme
-        if(listBloc[this.currentId + 1].type.includes("weapon")) {
-            console.log("CASE ARME RIGHT");
+        /**************************************************************************
+        /***** 1 - CREATION D'UNE CASE DE BASE DU PLATEAU LORS DU DÉPLACEMENT *****/
+        /**************************************************************************/
+
+        let image = new Image();
+        image.src = "assets/img/tiles-1.jpg";
+        ctx.drawImage(image, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
+
+        /****************************************************************************************
+        /***** 2 - PERMET DE DEPOSER L'ARME PRECEDENTE DU JOUEUR QUAND IL SORT DE LA CASE ARME  *****/
+        /****************************************************************************************/
+
+        if (this.previousWeapon !== -1) {
+            image.src = `assets/img/weapon-${this.previousWeapon}.png`;
+            ctx.drawImage(image, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
+            listBloc[this.currentId].type = `weapon${this.previousWeapon}`;
+            this.previousWeapon = -1;
         }
 
-        let canvas = new Image();
+        /****************************************************************
+        /***** PERMET DE FAIRE DES VERIFICATIONS SUR LE TYPE D'ARME *****/
+        /****************************************************************/
 
-        canvas.src = "assets/img/tiles-1.jpg";
-        ctx.drawImage(canvas, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
+        if (listBloc[this.currentId + 1].type.includes("weapon")) {
+
+            this.previousWeapon = this.currentWeapon;
+
+            if (listBloc[this.currentId - length].type === "weapon1") {
+                this.currentWeapon = 1;
+            }
+
+            if (listBloc[this.currentId - length].type === "weapon2") {
+                this.currentWeapon = 2;
+            }
+
+            if (listBloc[this.currentId - length].type === "weapon3") {
+                this.currentWeapon = 3;
+            }
+
+            if (listBloc[this.currentId - length].type === "weapon4") {
+                this.currentWeapon = 4;
+            }
+        }
+
+        /***********************************************************************************************************
+        /***** ACTION DE DEPLACEMENT DU JOUEUR VERS LE HAUT, CREATION D'UNE IMAGE PLAYER A CHAQUE DEPLACEMENT *****/
+        /**********************************************************************************************************/
 
         this.currentId += 1;
-        console.log("Déplacement vers la droite", this.currentId);
+        image.src = designPlayers;
+        ctx.drawImage(image, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
 
-        canvas.src = designPlayers;
-        ctx.drawImage(canvas, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
     }
 
     //MovePlayerDown
     movePlayerDown(length, ctx, designPlayers) {
+
+        /*********************************************************
+        /***** BLOQUAGE DU JOUEUR DANS CERTAINES CONDITIONS *****/
+        /*********************************************************/
 
         //Si currentId > length * length (total des cases du plateau) alors on bloque l'avancé du joueur
         if (this.currentId + length > length * length || listBloc[this.currentId + length].type === "obstacle") {
@@ -173,26 +218,66 @@ class Player {
             return;
         }
 
-        //Vérification arme
-        if(listBloc[this.currentId + length].type.includes("weapon")) {
-            console.log("CASE ARME DOWN");
+        /**************************************************************************
+        /***** 1 - CREATION D'UNE CASE DE BASE DU PLATEAU LORS DU DÉPLACEMENT *****/
+        /**************************************************************************/
+
+        let image = new Image();
+        image.src = "assets/img/tiles-1.jpg";
+        ctx.drawImage(image, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
+
+        /****************************************************************************************
+        /***** 2 - PERMET DE DEPOSER L'ARME PRECEDENTE DU JOUEUR QUAND IL SORT DE LA CASE ARME  *****/
+        /****************************************************************************************/
+
+        if (this.previousWeapon !== -1) {
+            image.src = `assets/img/weapon-${this.previousWeapon}.png`;
+            ctx.drawImage(image, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
+            listBloc[this.currentId].type = `weapon${this.previousWeapon}`;
+            this.previousWeapon = -1;
         }
 
-        let canvas = new Image();
+        /****************************************************************
+        /***** PERMET DE FAIRE DES VERIFICATIONS SUR LE TYPE D'ARME *****/
+        /****************************************************************/
 
-        canvas.src = "assets/img/tiles-1.jpg";
-        ctx.drawImage(canvas, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
+        if (listBloc[this.currentId + length].type.includes("weapon")) {
+
+            this.previousWeapon = this.currentWeapon;
+
+            if (listBloc[this.currentId - length].type === "weapon1") {
+                this.currentWeapon = 1;
+            }
+
+            if (listBloc[this.currentId - length].type === "weapon2") {
+                this.currentWeapon = 2;
+            }
+
+            if (listBloc[this.currentId - length].type === "weapon3") {
+                this.currentWeapon = 3;
+            }
+
+            if (listBloc[this.currentId - length].type === "weapon4") {
+                this.currentWeapon = 4;
+            }
+        }
+
+        /***********************************************************************************************************
+        /***** ACTION DE DEPLACEMENT DU JOUEUR VERS LE HAUT, CREATION D'UNE IMAGE PLAYER A CHAQUE DEPLACEMENT *****/
+        /**********************************************************************************************************/
 
         this.currentId += length;
-        console.log("Déplacement vers le bas", this.currentId);
-
-
-        canvas.src = designPlayers;
-        ctx.drawImage(canvas, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
+        image.src = designPlayers;
+        ctx.drawImage(image, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
     }
 
     //MovePlayerLeft
     movePlayerLeft(ctx, designPlayers) {
+
+
+        /*********************************************************
+        /***** BLOQUAGE DU JOUEUR DANS CERTAINES CONDITIONS *****/
+        /*********************************************************/
 
         //currentId % 10 == 9 alors on bloque l'avancé du joueur
         if (this.currentId === 0 || (this.currentId - 1) % 10 === 9 || listBloc[this.currentId - 1].type === "obstacle") {
@@ -200,20 +285,64 @@ class Player {
             return;
         }
 
-        //Vérification arme
-        if(listBloc[this.currentId - 1].type.includes("weapon")) {
-            console.log("CASE ARME LEFT");
+        /**************************************************************************
+        /***** 1 - CREATION D'UNE CASE DE BASE DU PLATEAU LORS DU DÉPLACEMENT *****/
+        /**************************************************************************/
+
+        let image = new Image();
+        image.src = "assets/img/tiles-1.jpg";
+        ctx.drawImage(image, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
+
+        /****************************************************************************************
+        /***** 2 - PERMET DE DEPOSER L'ARME PRECEDENTE DU JOUEUR QUAND IL SORT DE LA CASE ARME  *****/
+        /****************************************************************************************/
+
+        if (this.previousWeapon !== -1) {
+            image.src = `assets/img/weapon-${this.previousWeapon}.png`;
+            ctx.drawImage(image, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
+            listBloc[this.currentId].type = `weapon${this.previousWeapon}`;
+            this.previousWeapon = -1;
         }
 
-        let canvas = new Image();
+        /****************************************************************
+        /***** PERMET DE FAIRE DES VERIFICATIONS SUR LE TYPE D'ARME *****/
+        /****************************************************************/
 
-        canvas.src = "assets/img/tiles-1.jpg";
-        ctx.drawImage(canvas, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
+        if (listBloc[this.currentId - 1].type.includes("weapon")) {
+
+            this.previousWeapon = this.currentWeapon;
+
+            if (listBloc[this.currentId - length].type === "weapon1") {
+                this.currentWeapon = 1;
+            }
+
+            if (listBloc[this.currentId - length].type === "weapon2") {
+                this.currentWeapon = 2;
+            }
+
+            if (listBloc[this.currentId - length].type === "weapon3") {
+                this.currentWeapon = 3;
+            }
+
+            if (listBloc[this.currentId - length].type === "weapon4") {
+                this.currentWeapon = 4;
+            }
+        }
+
+        /***********************************************************************************************************
+        /***** ACTION DE DEPLACEMENT DU JOUEUR VERS LE HAUT, CREATION D'UNE IMAGE PLAYER A CHAQUE DEPLACEMENT *****/
+        /**********************************************************************************************************/
 
         this.currentId -= 1;
-        console.log("Déplacement vers la gauche", this.currentId);
+        image.src = designPlayers;
+        ctx.drawImage(image, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
 
-        canvas.src = designPlayers;
-        ctx.drawImage(canvas, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
+
+
+
+
+
+
     }
+
 }
