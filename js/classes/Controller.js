@@ -13,6 +13,10 @@ class Controller {
         const map = new Map();
         map.createMap(length, ctx, widthMax, heightMax, sizeBloc, numberBlocWidth, listBloc);
 
+        //Init obstacles
+        const obstacle = new Obstacle();
+        obstacle.createObstacle(length, ctx);
+
         //INIT WEAPON
         const weapon1 = new Weapon(1, "lance-pierre", 10);
         const weapon2 = new Weapon(2, "masse", 20);
@@ -29,8 +33,9 @@ class Controller {
         player1.createPlayer(1, length, ctx);
         player2.createPlayer(2, length, ctx);
 
-
-
+        //*render
+        const randomElement = new RandomElement(length);
+        randomElement.render(ctx);
 
 
         //***** Déplacement du joueur ******/
@@ -53,6 +58,7 @@ class Controller {
         //Permet de switcher d'un joueur à l'autre
         nextBtn.addEventListener("click", function () {
             numberClick = 0;
+
             if (current_player == 0) {
                 current_player = 1;
             } else {
@@ -63,9 +69,10 @@ class Controller {
 
         //Affichage de la bonne image du joueur suivant le joueur courant et incrémentation
         btnUp.addEventListener("click", function () {
+
             //Incrémentation du click du joueur
             numberClick++;
-            console.log(numberClick)
+            // console.log(numberClick)
 
             //Si le nombre de click est suppérieur ou égale à 4 (3 déplacements) on change de joueur
             if (numberClick >= 4) {
@@ -88,7 +95,7 @@ class Controller {
             //Appel de la methode movePlayerUp
             players[current_player].movePlayerUp(length, ctx, designPlayers);
         });
-        
+
 
         btnRight.addEventListener("click", function () {
 
@@ -167,12 +174,5 @@ class Controller {
             }
             players[current_player].movePlayerLeft(ctx, designPlayers);
         });
-
-
-
-
-        //Init obstacles
-        const obstacle = new Obstacle();
-        obstacle.createObstacle(length, ctx);
     }
 }

@@ -65,7 +65,7 @@ class Player {
         }
 
         // On dessine le joueur
-        randomElement.drawBlock(`player${playerNumber}`, `assets/img/player-${playerNumber}.jpg`, ctx);
+        // randomElement.drawBlock(`player${playerNumber}`, `assets/img/player-${playerNumber}.jpg`, ctx);
     }
 
     /******  MOUVEMENT DES JOUEURS *******/
@@ -81,7 +81,7 @@ class Player {
         }
 
         /**************************************************************************
-        /***** 1 - CREATION D'UNE CASE DE BASE DU PLATEAU LORS DU DÉPLACEMENT *****/
+        /*****  CREATION D'UNE CASE DE BASE DU PLATEAU LORS DU DÉPLACEMENT *****/
         /**************************************************************************/
 
         let image = new Image();
@@ -89,7 +89,7 @@ class Player {
         ctx.drawImage(image, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
 
         /****************************************************************************************
-        /***** 2 - PERMET DE DEPOSER L'ARME PRECEDENTE DU JOUEUR QUAND IL SORT DE LA CASE ARME  *****/
+        /***** PERMET DE DEPOSER L'ARME PRECEDENTE DU JOUEUR QUAND IL SORT DE LA CASE ARME  *****/
         /****************************************************************************************/
 
         if (this.previousWeapon !== -1) {
@@ -128,14 +128,10 @@ class Player {
         /***** ACTION DE DEPLACEMENT DU JOUEUR VERS LE HAUT, CREATION D'UNE IMAGE PLAYER A CHAQUE DEPLACEMENT *****/
         /**********************************************************************************************************/
 
-        if(this.currentId == this.currentId - length * 3) {
-            console.log('test')
-        }
         this.currentId = this.currentId - length;
 
         image.src = designPlayers;
         ctx.drawImage(image, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
-
     }
 
     //MovePlayerRight
