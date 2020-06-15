@@ -33,6 +33,7 @@ class Controller {
         player1.createPlayer(1, length, ctx);
         player2.createPlayer(2, length, ctx);
 
+
         //*render
         const randomElement = new RandomElement(length);
         randomElement.render(ctx);
@@ -43,7 +44,8 @@ class Controller {
         let btnRight = document.getElementById("btn-right");
         let btnDown = document.getElementById("btn-down");
         let btnLeft = document.getElementById("btn-left");
-        let nextBtn = document.getElementById("next-btn")
+        let nextBtn = document.getElementById("next-btn");
+
 
         // **** tableau des 2 joueurs ***/
         // players[0] = Joueur 1 (Chevalier)
@@ -54,21 +56,81 @@ class Controller {
         const design2 = "assets/img/player-2.jpg";
         let designPlayers = "";
         let numberClick = 0;
-
+        let boardPlayer1 = document.getElementById("p1");
+        let boardPlayer2 = document.getElementById("p2");
+        
         //Permet de switcher d'un joueur à l'autre
         nextBtn.addEventListener("click", function () {
             numberClick = 0;
-
+            //15_06
             if (current_player == 0) {
                 current_player = 1;
+                console.log(current_player)
+                boardPlayer2.classList.add("whatPlayer");
+                boardPlayer1.classList.remove("whatPlayer");
             } else {
                 current_player = 0;
+                console.log(current_player)
+                boardPlayer1.classList.add("whatPlayer");
+                boardPlayer2.classList.remove("whatPlayer");
             }
             current_player = (current_player++);
         });
 
-        //Affichage de la bonne image du joueur suivant le joueur courant et incrémentation
+        //15_06
+        //Joueur de base séléctionné
+        if (current_player == 0) {
+            boardPlayer1.classList.add("whatPlayer");
+        } else {
+            boardPlayer2.classList.add("whatPlayer");
+        }
+
+        //Affichage de la bonne image du joueur 
         btnUp.addEventListener("click", function () {
+
+            //Incrémentation du click du joueur
+            numberClick++;
+            // console.log(numberClick)
+
+            //Si le nombre de click est suppérieur ou égale à 4 (3 déplacements) on change de joueur
+            if (numberClick >= 4) {
+                if (current_player == 0) {
+                    current_player = 1;
+                    boardPlayer2.classList.add("whatPlayer");
+                    boardPlayer1.classList.remove("whatPlayer");
+                } else {
+                    current_player = 0;
+                    boardPlayer1.classList.add("whatPlayer");
+                    boardPlayer2.classList.remove("whatPlayer");
+                }
+                current_player = (current_player++);
+                numberClick = 1;
+            }
+
+            //15_06
+            //Montre quel joueur est en train de jouer
+            if (numberClick === 3) {
+                if (current_player == 0) {
+                    boardPlayer2.classList.add("whatPlayer");
+                    boardPlayer1.classList.remove("whatPlayer");
+                } else {
+                    boardPlayer1.classList.add("whatPlayer");
+                    boardPlayer2.classList.remove("whatPlayer");
+                }
+            }
+
+            //Vérification de l'image du joueur
+            if (current_player == 0) {
+                designPlayers = design1;
+            } else {
+                designPlayers = design2;
+            }
+
+            //Appel de la methode movePlayerUp
+            players[current_player].movePlayerUp(length, ctx, designPlayers);
+        });
+
+        btnRight.addEventListener("click", function () {
 
             //Incrémentation du click du joueur
             numberClick++;
@@ -85,35 +147,17 @@ class Controller {
                 numberClick = 1;
             }
 
-            //Vérification de l'image du joueur
-            if (current_player == 0) {
-                designPlayers = design1;
-            } else {
-                designPlayers = design2;
-            }
-
-            //Appel de la methode movePlayerUp
-            players[current_player].movePlayerUp(length, ctx, designPlayers);
-        });
-
-
-        btnRight.addEventListener("click", function () {
-
-            //Incrémentation du click du joueur
-            numberClick++;
-            console.log(numberClick)
-
-            //Si le nombre de click est suppérieur ou égale à 4 (3 déplacements) on change de joueur
-            if (numberClick >= 4) {
+            //15_06
+            //Montre quel joueur est en train de jouer
+            if (numberClick === 3) {
                 if (current_player == 0) {
-                    current_player = 1;
+                    boardPlayer2.classList.add("whatPlayer");
+                    boardPlayer1.classList.remove("whatPlayer");
                 } else {
-                    current_player = 0;
+                    boardPlayer1.classList.add("whatPlayer");
+                    boardPlayer2.classList.remove("whatPlayer");
                 }
-                current_player = (current_player++);
-                numberClick = 1;
             }
-
 
             if (current_player == 0) {
                 designPlayers = design1;
@@ -123,11 +167,10 @@ class Controller {
             players[current_player].movePlayerRight(ctx, designPlayers);
         });
 
-
         btnDown.addEventListener("click", function () {
             //Incrémentation du click du joueur
             numberClick++;
-            console.log(numberClick)
+            // console.log(numberClick)
 
             //Si le nombre de click est suppérieur ou égale à 4 (3 déplacements) on change de joueur
             if (numberClick >= 4) {
@@ -138,6 +181,18 @@ class Controller {
                 }
                 current_player = (current_player++);
                 numberClick = 1;
+            }
+
+            //15_06
+            //Montre quel joueur est en train de jouer
+            if (numberClick === 3) {
+                if (current_player == 0) {
+                    boardPlayer2.classList.add("whatPlayer");
+                    boardPlayer1.classList.remove("whatPlayer");
+                } else {
+                    boardPlayer1.classList.add("whatPlayer");
+                    boardPlayer2.classList.remove("whatPlayer");
+                }
             }
 
 
@@ -149,12 +204,11 @@ class Controller {
             players[current_player].movePlayerDown(length, ctx, designPlayers);
         });
 
-
         btnLeft.addEventListener("click", function () {
 
             //Incrémentation du click du joueur
             numberClick++;
-            console.log(numberClick)
+            // console.log(numberClick)
 
             //Si le nombre de click est suppérieur ou égale à 4 (3 déplacements) on change de joueur
             if (numberClick >= 4) {
@@ -165,6 +219,18 @@ class Controller {
                 }
                 current_player = (current_player++);
                 numberClick = 1;
+            }
+
+            //15_06
+            //Montre quel joueur est en train de jouer
+            if (numberClick === 3) {
+                if (current_player == 0) {
+                    boardPlayer2.classList.add("whatPlayer");
+                    boardPlayer1.classList.remove("whatPlayer");
+                } else {
+                    boardPlayer1.classList.add("whatPlayer");
+                    boardPlayer2.classList.remove("whatPlayer");
+                }
             }
 
             if (current_player == 0) {

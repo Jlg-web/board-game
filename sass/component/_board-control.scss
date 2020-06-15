@@ -13,7 +13,7 @@
         align-items: center;
         font-size: 2rem;
         margin: 0 0 0 4rem;
-        padding-bottom: 1rem;
+        // padding-bottom: 1rem;
         position: relative;
 
         &::after {
@@ -25,6 +25,7 @@
     p {
         font-size: 1.7rem;
         margin-bottom: 1rem;
+        display: none;
     }
 
     .action-player {
@@ -36,8 +37,7 @@
     }
 
     .player-1 {
-        border-bottom: 1px solid #d2d2d2;
-        padding-bottom: 2.5rem;
+        // border-bottom: 1px solid #d2d2d2;
 
         h2,
         span {
@@ -66,6 +66,11 @@
                 content: url("../assets/img/icon-player-2.jpg");
             }
         }
+    }
+
+    .player-1,
+    .player-2 {
+        padding: 3rem;
     }
 }
 

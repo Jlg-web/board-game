@@ -28,26 +28,14 @@ class RandomElement {
         }
     }
 
-    // drawBlock(type, imageSrc, ctx) {
-    //     for (let i = 0; i < this.length * this.length; i++) {
-    //         if (listBloc[i].type === type) {
-    //             let canvas = new Image();
-    //             canvas.src = imageSrc;
-    //             canvas.addEventListener('load', function () {
-    //                 ctx.drawImage(canvas, listBloc[i].positionX, listBloc[i].positionY);
-    //             }, false);
-    //         }
-    //     }
-    // }
-
     render(ctx) {
         // console.log(listBloc)
         for (let i = 0; i < this.length * this.length; i++) {
-            let canvas = new Image();
-            canvas.src = this.getImageSrc(listBloc[i].type);
-            console.log(canvas);
-            canvas.addEventListener('load', function () {
-                ctx.drawImage(canvas, listBloc[i].positionX, listBloc[i].positionY);
+            let image = new Image();
+            image.src = this.getImageSrc(listBloc[i].type);
+            console.log(image);
+            image.addEventListener('load', function () {
+                ctx.drawImage(image, listBloc[i].positionX, listBloc[i].positionY);
             }, false);
             
         }

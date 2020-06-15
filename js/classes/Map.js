@@ -9,10 +9,10 @@ class Map {
 
         //On parcours chaque bloc
         for (let i = 0; i < length * length; i++) {
-            let canvas = new Image();
-            canvas.src = "assets/img/tiles-1.jpg";
-            canvas.addEventListener('load', function () {
-                ctx.drawImage(canvas, listBloc[i].positionX, listBloc[i].positionY);
+            let image = new Image();
+            image.src = "assets/img/tiles-1.jpg";
+            image.addEventListener('load', function () {
+                ctx.drawImage(image, listBloc[i].positionX, listBloc[i].positionY);
             }, false);
 
             //On ajoute un objet à chaque bloc

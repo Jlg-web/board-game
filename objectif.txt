@@ -1,31 +1,21 @@
-Pour la récupération des armes
+09/06/2020
+------------------------------
 
-- Dans constrcuctor player.js :
+- Renommer les canvas en image ✔
+- Supprimer drawBlock ✔
+- Retirer ctx qui est en paramètre de certaines fonctions (de création d'obstacles, d'armes et de joueurs notamment) ✔
+- Montrer quel joueur est en train de jouer : ça peut être directement sur le plateau ou dans le HTML à côté 
+tu peux entourer le joueur en train de jouer sur la droite par exemple. ✔
 
-this.currentWeapon = 10;
-this.previousWeapon = "";
+- Si le joueur est à la fin de son premier ou de son deuxième mouvement et que la case suivante 
+est un obstacle ou le fait sortir du plateau, on passe au joueur suivant.
 
-on change le current weapon à la récuperation de l'arme
-
-Le joueur tombe sur une case avec une arme -> changement currentWeapon 
-
-
-// Récupération de l'élément du dessus
-if(listBloc[this.currentId - length].type.includes("weapon")) 
-
-
-
-1- Le joueur possède une arme (arme par défaut: lance-pierre, 10 points de dégâts)
-
-2- LE JOUEUR SE TROUVE SUR UNE CASE ARME : l'arme actuelle du joueur est remplacée par l'arme présente sur la case (changement "currentWeapon")
-
-3- LE JOUEUR QUITTE LA CASE ARME : l'arme sur la case est remplacé par l'arme précédente du joueur (changement "previousWeapon")
+- Avoir une notion de direction, si le premier mouvement du joueur est vers la droite par exemple, 
+alors le joueur ne peut se déplacer plus que vers la droite pour ce tour. 
+(peut-être que te souvenir que la droite consiste à faire +1 pourra t'aider)
 
 
-____________________________________________________________
 
-Pour le deplacement des joueurs de 1 à 3 cases
 
-bouton
-Si le joueur veut se déplacer d'une ou deux case, il clique sur le bouton pour passer au joueur suivant
-sinon après 3 mouvement sur un axe, on passe automatiquement au joueur suivant
+Si il te reste du temps, tu peux essayer de factoriser les fonctions de mouvement en une seule fonction 
+(attention à bien avoir commit avec Git avant)

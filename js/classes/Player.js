@@ -10,7 +10,7 @@ class Player {
 
     /******  CREATION DES JOUEURS *******/
     //CreatePlayer
-    createPlayer(playerNumber, length, ctx) {
+    createPlayer(playerNumber, length) {
 
         let randomElement = new RandomElement(length);
         randomElement.typeBlock(1, `player${playerNumber}`);
@@ -21,7 +21,7 @@ class Player {
         /* Création de la variable playerIsValid */
         let playerIdIsValid = false;
 
-        /* Vérification des jouerus côte à côte */
+        /* Vérification des joeurs côte à côte */
         while (!playerIdIsValid) {
 
             /* On assigne la variable playerIdIsValid à true */
@@ -63,9 +63,6 @@ class Player {
                 this.currentId = randomElement.idElement(`player${playerNumber}`);
             }
         }
-
-        // On dessine le joueur
-        // randomElement.drawBlock(`player${playerNumber}`, `assets/img/player-${playerNumber}.jpg`, ctx);
     }
 
     /******  MOUVEMENT DES JOUEURS *******/
@@ -339,6 +336,10 @@ class Player {
 
 
 
+    }
+
+    whatPlayer() {
+        
     }
 
 }
