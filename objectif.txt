@@ -7,14 +7,14 @@
 - Montrer quel joueur est en train de jouer : ça peut être directement sur le plateau ou dans le HTML à côté 
 tu peux entourer le joueur en train de jouer sur la droite par exemple. ✔
 
+
 - Si le joueur est à la fin de son premier ou de son deuxième mouvement et que la case suivante 
 est un obstacle ou le fait sortir du plateau, on passe au joueur suivant.
+
 
 - Avoir une notion de direction, si le premier mouvement du joueur est vers la droite par exemple, 
 alors le joueur ne peut se déplacer plus que vers la droite pour ce tour. 
 (peut-être que te souvenir que la droite consiste à faire +1 pourra t'aider)
-
-
 
 
 Si il te reste du temps, tu peux essayer de factoriser les fonctions de mouvement en une seule fonction 

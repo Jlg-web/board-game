@@ -6,6 +6,10 @@ class Player {
         this.previousWeapon = -1;
         this.level = 10;
         this.currentId = -1;
+
+        // this.numberClick = 0;
+        // this.boardPlayer1 = document.getElementById("p1");
+        // this.boardPlayer2 = document.getElementById("p2");
     }
 
     /******  CREATION DES JOUEURS *******/
@@ -65,14 +69,16 @@ class Player {
         }
     }
 
+
     /******  MOUVEMENT DES JOUEURS *******/
     //MovePlayerUp
     movePlayerUp(length, ctx, designPlayers) {
 
+
+
         /*********************************************************
         /***** BLOQUAGE DU JOUEUR DANS CERTAINES CONDITIONS *****/
         /*********************************************************/
-
         if (this.currentId - length < 0 || listBloc[this.currentId - length].type === "obstacle") {
             return;
         }
@@ -124,11 +130,11 @@ class Player {
         /***********************************************************************************************************
         /***** ACTION DE DEPLACEMENT DU JOUEUR VERS LE HAUT, CREATION D'UNE IMAGE PLAYER A CHAQUE DEPLACEMENT *****/
         /**********************************************************************************************************/
-
         this.currentId = this.currentId - length;
-
         image.src = designPlayers;
         ctx.drawImage(image, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
+
+        return this.currentId;
     }
 
     //MovePlayerRight
@@ -337,9 +343,4 @@ class Player {
 
 
     }
-
-    whatPlayer() {
-        
-    }
-
 }
