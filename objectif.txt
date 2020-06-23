@@ -19,3 +19,46 @@ alors le joueur ne peut se déplacer plus que vers la droite pour ce tour.
 
 Si il te reste du temps, tu peux essayer de factoriser les fonctions de mouvement en une seule fonction 
 (attention à bien avoir commit avec Git avant)
+
+
+22/06/2020
+_______________
+
+Notion de direction du joueur :
+
+- Enregistrer le 1er mouvement du joueur (ex : haut)
+
+- Dans une fonction, vérifier la direction
+
+- "return" dans addEventListener pour arrêter l'execution
+
+- Remettre à zéro le mouvement avant le "return"
+
+- Si le joueur essaye de faire un autre mouvement (bas, droite, gauche), déclencher une alerte ("vous devez aller vers le heut pour ce tour")
+
+
+----- tentative ------
+
+let playerDirection = "haut";
+
+if(this.numberClick === 1 && firstMove === "haut") {
+
+}
+
+checkDirection() {
+    if(playerDirection) {
+        console.log("bonne direction");
+        else {
+        console.log("Vous devez aller vers le haut pour ce tour");
+        }
+    }
+}
+
+btnUp.addEventListener("click", () => {
+
+    if(!checkDirection) {
+        playerDirection = 0;
+        return;
+    }
+    
+}

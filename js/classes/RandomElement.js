@@ -71,7 +71,6 @@ class RandomElement {
         }
     }
 
-    //15_06
     switchPlayer() {
 
         let self = this;    
@@ -94,7 +93,6 @@ class RandomElement {
 
     }
 
-    //15_06
     SelectOriginPlayer() {
 
         let self = this;  
@@ -106,9 +104,5 @@ class RandomElement {
         }
 
     }
-
-    //15_06
-    //verif joueur
-    
 
 }

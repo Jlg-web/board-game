@@ -6,10 +6,6 @@ class Player {
         this.previousWeapon = -1;
         this.level = 10;
         this.currentId = -1;
-
-        // this.numberClick = 0;
-        // this.boardPlayer1 = document.getElementById("p1");
-        // this.boardPlayer2 = document.getElementById("p2");
     }
 
     /******  CREATION DES JOUEURS *******/
@@ -69,12 +65,12 @@ class Player {
         }
     }
 
+    
+
 
     /******  MOUVEMENT DES JOUEURS *******/
     //MovePlayerUp
     movePlayerUp(length, ctx, designPlayers) {
-
-
 
         /*********************************************************
         /***** BLOQUAGE DU JOUEUR DANS CERTAINES CONDITIONS *****/
@@ -137,6 +133,16 @@ class Player {
         return this.currentId;
     }
 
+
+
+
+
+
+
+
+
+
+
     //MovePlayerRight
     movePlayerRight(ctx, designPlayers) {
 
@@ -146,7 +152,7 @@ class Player {
 
         //Si currentId % 10 == 0 alors on bloque l'avancé du joueur
         if ((this.currentId + 1) % 10 === 0 || listBloc[this.currentId + 1].type === "obstacle") {
-            console.log("STOP");
+            console.log("Obstacle");
             return;
         }
 
@@ -202,6 +208,8 @@ class Player {
         image.src = designPlayers;
         ctx.drawImage(image, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
 
+        return this.currentId;
+
     }
 
     //MovePlayerDown
@@ -213,7 +221,7 @@ class Player {
 
         //Si currentId > length * length (total des cases du plateau) alors on bloque l'avancé du joueur
         if (this.currentId + length > length * length || listBloc[this.currentId + length].type === "obstacle") {
-            console.log("STOP");
+            console.log("Obstacle");
             return;
         }
 
@@ -268,6 +276,8 @@ class Player {
         this.currentId += length;
         image.src = designPlayers;
         ctx.drawImage(image, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
+
+        return this.currentId;
     }
 
     //MovePlayerLeft
@@ -280,7 +290,7 @@ class Player {
 
         //currentId % 10 == 9 alors on bloque l'avancé du joueur
         if (this.currentId === 0 || (this.currentId - 1) % 10 === 9 || listBloc[this.currentId - 1].type === "obstacle") {
-            console.log("STOP");
+            console.log("Obstacle");
             return;
         }
 
@@ -336,11 +346,7 @@ class Player {
         image.src = designPlayers;
         ctx.drawImage(image, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
 
-
-
-
-
-
+        return this.currentId;
 
     }
 }
