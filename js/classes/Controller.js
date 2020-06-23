@@ -108,12 +108,12 @@ class Controller {
             let currentIdMoveRight = players[this.currentPlayer].movePlayerRight(ctx, designPlayers);
 
             //Verif joueur côte à côte (fight)
-            if (listBloc[currentIdMoveRight + 1].type.includes("player")) {
-                console.log("FIGHT");
-            }
+            // if (listBloc[currentIdMoveRight + 1].type.includes("player")) {
+            //     console.log("FIGHT");
+            // }
 
             //Verif obstacle 1 un ou 2 mouvements 
-            if ((this.numberClick === 1 || this.numberClick === 2) && listBloc[currentIdMoveRight + 1].type === "obstacle") {
+            if ((this.numberClick === 1 || this.numberClick === 2) && (currentIdMoveRight % 10 === 9 || listBloc[currentIdMoveRight + 1].type === "obstacle")) {
                 this.switchPlayer();
             }
 
@@ -155,12 +155,12 @@ class Controller {
             let currentIdMoveDown = players[this.currentPlayer].movePlayerDown(length, ctx, designPlayers);
 
             //Verif joueur côte à côte
-            if (listBloc[currentIdMoveDown + length].type.includes("player")) {
-                console.log("FIGHT");
-            }
+            // if (listBloc[currentIdMoveDown + length].type.includes("player")) {
+            //     console.log("FIGHT");
+            // }
 
             //Verif obstacle 1 un ou 2 mouvements 
-            if ((this.numberClick === 1 || this.numberClick === 2) && listBloc[currentIdMoveDown + length].type === "obstacle") {
+            if ((this.numberClick === 1 || this.numberClick === 2) && (currentIdMoveDown > length * length - length || listBloc[currentIdMoveDown + length].type === "obstacle")) {
                 this.switchPlayer();
             }
 
@@ -202,14 +202,13 @@ class Controller {
             //Appel de la methode movePlayerUp
             let currentIdMoveLeft = players[this.currentPlayer].movePlayerLeft(ctx, designPlayers);
 
-            //Verif joueur côte à côte
-            if (listBloc[currentIdMoveLeft - 1].type.includes("player")) {
-                console.log("FIGHT");
-            }
-
+            // //Verif joueur côte à côte
+            // if (listBloc[currentIdMoveLeft - 1].type.includes("player")) {
+            //     console.log("FIGHT");
+            // }
 
             //Verif obstacle 1 un ou 2 mouvements 
-            if ((this.numberClick === 1 || this.numberClick === 2) && listBloc[currentIdMoveLeft - 1].type === "obstacle") {
+            if ((this.numberClick === 1 || this.numberClick === 2) && (currentIdMoveLeft % 10 === 0 || listBloc[currentIdMoveLeft - 1].type === "obstacle")) {
                 this.switchPlayer();
             }
 
@@ -245,17 +244,17 @@ class Controller {
             }
 
             //Appel de la methode movePlayerUp
-            let currentId = players[this.currentPlayer].movePlayerUp(length, ctx, designPlayers);
+            let currentIdMoveUp = players[this.currentPlayer].movePlayerUp(length, ctx, designPlayers);
 
             //Verif joueur côte à côte
-            if (listBloc[currentId - length].type.includes("player")) {
-                console.log("FIGHT");
-            }
-
+            // if (listBloc[currentId - length].type.includes("player")) {
+            //     console.log("FIGHT");
+            // }
 
             //Si le nombre de click est égal à 1 un 2 et que l'element au dessus du joueur est un obstacle, on change de joueur 
             //Si le joueur sort du plateau, on change de joueur
-            if ((this.numberClick === 1 || this.numberClick === 2) && this.currentId - length < 0 || listBloc[currentId - length].type === "obstacle") {
+            console.log(this.numberClick, currentIdMoveUp);
+            if ((this.numberClick === 1 || this.numberClick === 2) && (currentIdMoveUp < length || listBloc[currentIdMoveUp - length].type === "obstacle")) {
                 this.switchPlayer();
             }
 
