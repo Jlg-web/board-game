@@ -36,10 +36,15 @@ class RandomElement {
         // console.log(listBloc)
         for (let i = 0; i < this.length * this.length; i++) {
             let image = new Image();
-            image.src = this.getImageSrc(listBloc[i].type);
-            console.log(image);
+            image.src = "assets/img/tiles-1.jpg";
             image.addEventListener('load', function () {
                 ctx.drawImage(image, listBloc[i].positionX, listBloc[i].positionY);
+            }, false);
+            let image2 = new Image();
+            image2.src = this.getImageSrc(listBloc[i].type);
+            // console.log(image);
+            image2.addEventListener('load', function () {
+                ctx.drawImage(image2, listBloc[i].positionX, listBloc[i].positionY);
             }, false);
         }
     }

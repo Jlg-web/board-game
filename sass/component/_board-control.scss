@@ -25,7 +25,8 @@
     p {
         font-size: 1.7rem;
         margin-bottom: 1rem;
-        display: none;
+        margin-bottom: 1.5rem;
+        // display: none;
     }
 
     .action-player {
@@ -37,7 +38,14 @@
     }
 
     .player-1 {
-        // border-bottom: 1px solid #d2d2d2;
+
+        .point-life,
+        .weapon-player {
+            strong {
+                color: $quaternary-color;
+            }
+        }
+
 
         h2,
         span {
@@ -54,6 +62,13 @@
     .player-2 {
         padding-top: 3.6rem;
 
+        .point-life,
+        .weapon-player {
+            strong {
+                color: $quinary-color;
+            }
+        }
+
         h2,
         span {
             color: $quinary-color;
@@ -68,9 +83,43 @@
         }
     }
 
+
+
     .player-1,
     .player-2 {
         padding: 3rem;
+
+        h2 {
+            margin-bottom: 2rem;
+        }
+
+        .point-life,
+        .weapon-player {
+            font-weight: lighter;
+            strong {
+             
+            }
+        }
+
+        .weapon-player {
+
+        }
+
+        hr {
+            margin-bottom: 2rem;
+            margin-top: 2rem;
+        }
+
+        button {
+            padding: 2rem;
+            cursor: pointer;
+            border: none;
+            background: #d6d6d6;
+
+            &:hover {
+                background-color: #cbc9c9;
+            }
+        }
     }
 }
 

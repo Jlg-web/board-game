@@ -1,11 +1,12 @@
 class Player {
 
-    constructor(name) {
+    constructor(id, name) {
         this.name = name;
         this.currentWeapon = 1;
         this.previousWeapon = -1;
         this.level = 10;
         this.currentId = -1;
+        this.id = id;
     }
 
     /******  CREATION DES JOUEURS *******/
@@ -16,7 +17,6 @@ class Player {
         randomElement.typeBlock(1, `player${playerNumber}`);
 
         this.currentId = randomElement.idElement(`player${playerNumber}`);
-        console.log("idPlayer in createPlayer", this.currentId);
 
         /* Création de la variable playerIsValid */
         let playerIdIsValid = false;
@@ -65,9 +65,6 @@ class Player {
         }
     }
 
-    
-
-
     /******  MOUVEMENT DES JOUEURS *******/
     //MovePlayerUp
     movePlayerUp(length, ctx, designPlayers) {
@@ -82,18 +79,13 @@ class Player {
         /**************************************************************************
         /*****  CREATION D'UNE CASE DE BASE DU PLATEAU LORS DU DÉPLACEMENT *****/
         /**************************************************************************/
-
-        let image = new Image();
-        image.src = "assets/img/tiles-1.jpg";
-        ctx.drawImage(image, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
+        listBloc[this.currentId].type = "casevide";
 
         /****************************************************************************************
         /***** PERMET DE DEPOSER L'ARME PRECEDENTE DU JOUEUR QUAND IL SORT DE LA CASE ARME  *****/
         /****************************************************************************************/
 
         if (this.previousWeapon !== -1) {
-            image.src = `assets/img/weapon-${this.previousWeapon}.png`;
-            ctx.drawImage(image, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
             listBloc[this.currentId].type = `weapon${this.previousWeapon}`;
             this.previousWeapon = -1;
         }
@@ -127,21 +119,10 @@ class Player {
         /***** ACTION DE DEPLACEMENT DU JOUEUR VERS LE HAUT, CREATION D'UNE IMAGE PLAYER A CHAQUE DEPLACEMENT *****/
         /**********************************************************************************************************/
         this.currentId = this.currentId - length;
-        image.src = designPlayers;
-        ctx.drawImage(image, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
+        listBloc[this.currentId].type = `player${this.id}`;
 
         return this.currentId;
     }
-
-
-
-
-
-
-
-
-
-
 
     //MovePlayerRight
     movePlayerRight(ctx, designPlayers) {
@@ -159,18 +140,13 @@ class Player {
         /**************************************************************************
         /***** 1 - CREATION D'UNE CASE DE BASE DU PLATEAU LORS DU DÉPLACEMENT *****/
         /**************************************************************************/
-
-        let image = new Image();
-        image.src = "assets/img/tiles-1.jpg";
-        ctx.drawImage(image, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
+        listBloc[this.currentId].type = "casevide";
 
         /****************************************************************************************
         /***** 2 - PERMET DE DEPOSER L'ARME PRECEDENTE DU JOUEUR QUAND IL SORT DE LA CASE ARME  *****/
         /****************************************************************************************/
 
         if (this.previousWeapon !== -1) {
-            image.src = `assets/img/weapon-${this.previousWeapon}.png`;
-            ctx.drawImage(image, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
             listBloc[this.currentId].type = `weapon${this.previousWeapon}`;
             this.previousWeapon = -1;
         }
@@ -205,9 +181,7 @@ class Player {
         /**********************************************************************************************************/
 
         this.currentId += 1;
-        image.src = designPlayers;
-        ctx.drawImage(image, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
-
+        listBloc[this.currentId].type = `player${this.id}`;
         return this.currentId;
 
     }
@@ -228,18 +202,13 @@ class Player {
         /**************************************************************************
         /***** 1 - CREATION D'UNE CASE DE BASE DU PLATEAU LORS DU DÉPLACEMENT *****/
         /**************************************************************************/
-
-        let image = new Image();
-        image.src = "assets/img/tiles-1.jpg";
-        ctx.drawImage(image, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
+        listBloc[this.currentId].type = "casevide";
 
         /****************************************************************************************
         /***** 2 - PERMET DE DEPOSER L'ARME PRECEDENTE DU JOUEUR QUAND IL SORT DE LA CASE ARME  *****/
         /****************************************************************************************/
 
         if (this.previousWeapon !== -1) {
-            image.src = `assets/img/weapon-${this.previousWeapon}.png`;
-            ctx.drawImage(image, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
             listBloc[this.currentId].type = `weapon${this.previousWeapon}`;
             this.previousWeapon = -1;
         }
@@ -274,9 +243,7 @@ class Player {
         /**********************************************************************************************************/
 
         this.currentId += length;
-        image.src = designPlayers;
-        ctx.drawImage(image, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
-
+        listBloc[this.currentId].type = `player${this.id}`;
         return this.currentId;
     }
 
@@ -297,18 +264,13 @@ class Player {
         /**************************************************************************
         /***** 1 - CREATION D'UNE CASE DE BASE DU PLATEAU LORS DU DÉPLACEMENT *****/
         /**************************************************************************/
-
-        let image = new Image();
-        image.src = "assets/img/tiles-1.jpg";
-        ctx.drawImage(image, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
+        listBloc[this.currentId].type = "casevide";
 
         /****************************************************************************************
         /***** 2 - PERMET DE DEPOSER L'ARME PRECEDENTE DU JOUEUR QUAND IL SORT DE LA CASE ARME  *****/
         /****************************************************************************************/
 
         if (this.previousWeapon !== -1) {
-            image.src = `assets/img/weapon-${this.previousWeapon}.png`;
-            ctx.drawImage(image, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
             listBloc[this.currentId].type = `weapon${this.previousWeapon}`;
             this.previousWeapon = -1;
         }
@@ -343,9 +305,7 @@ class Player {
         /**********************************************************************************************************/
 
         this.currentId -= 1;
-        image.src = designPlayers;
-        ctx.drawImage(image, listBloc[this.currentId].positionX, listBloc[this.currentId].positionY);
-
+        listBloc[this.currentId].type = `player${this.id}`;
         return this.currentId;
 
     }
