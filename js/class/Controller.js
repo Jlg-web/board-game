@@ -67,8 +67,6 @@ class Controller {
         });
         //end Combat test
 
-
-
         //Création Map
         const map = new Map();
         map.createMap(this.ctx, listBloc, this.length, this.widthMax, this.heightMax, this.sizeBloc, this.numberBlocWidth);
@@ -88,16 +86,7 @@ class Controller {
 
         //Création Armes
         const weapon1 = new Weapon(1, "lance-pierre", 10);
-        weapon1.createWeapon(this.length, 1);
-
-        const weapon2 = new Weapon(2, "masse", 20);
-        weapon2.createWeapon(this.length, 2);
-
-        const weapon3 = new Weapon(3, "arc", 30);
-        weapon3.createWeapon(this.length, 3);
-
-        const weapon4 = new Weapon(4, "pistolet laser", 50);
-        weapon4.createWeapon(this.length, 4);
+        Weapon.createWeapons(this.length);
 
         //Création render
         const renderElement = new RenderElement();
@@ -235,10 +224,6 @@ class Controller {
             renderElement.render(this.ctx, this.length);
 
         });
-
-
-        //FIGHT
-
 
     }
 
