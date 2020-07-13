@@ -1,0 +1,38 @@
+Fonctionnement du combat :
+
+- Chacun attaque à son tour
+
+- Les dégâts infligés dépendent de l’arme possédée par le joueur
+
+- Le joueur peut choisir d’attaquer ou de se défendre contre le prochain coup
+
+- Lorsque le joueur se défend, il encaisse 50% de dégâts en moins qu’en temps normal
+
+- Dès que les points de vie d’un joueur (initialement à 100) tombent à 0 , celui-ci a perdu. 
+Un message s’affiche et la partie est terminée.
+
+----------------------------------------------------------------------------------------------
+
+Lance-pierre = 10 points de dégâts
+Masse = 20 points de dégâts
+Arc = 30 point de dégâts
+Pistolet-laser = 50 points de dégâts
+
+p1 = 100 points de vie
+p2 = 100 points de vie
+
+
+Exemple : p1 entame le combat (il possède le lance-pierre)
+p2 possède la masse 
+
+p1 attaque -> points de vie de p2 = 90 points (10 points de dégâts)
+p2 attaque -> point de vie de p1 = 80 points (20 points de dégâts)
+p1 défend
+p2 attaque -> point de vie de p1 = 70 points (point de dégâts divisé par 2 grâce à la défense)
+p1 attaque -> point de vie de p2 = 80 points (10 points de dégâts) ...
+
+arrivé à 0 points, fin du combat
+
+
+
+
