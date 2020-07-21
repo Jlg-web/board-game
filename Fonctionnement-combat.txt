@@ -36,3 +36,13 @@ arrivé à 0 points, fin du combat
 
 
 
+Méthode fight :
+
+
+1 - On déclare les persos
+
+2 - Boucle While : tant que la santé des 2 persos est suppérieur à 0 -> on attaque ou on défend
+
+
+
+

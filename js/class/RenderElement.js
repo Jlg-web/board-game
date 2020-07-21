@@ -5,14 +5,23 @@ class RenderElement {
     //- on crée une image puis on récupère la source (image.src)
     //- On écoute l'evenement (load) puis on éxecute une fonction au chargement de la page : On dessine une image (ctx.drawimage)
     render(ctx, length) {
+
+        for (let i = 0; i < length * length; i++) {
+            let element = new Image();
+            element.src = this.getImageSrc("casevide");
+            element.addEventListener("load", () => {
+                ctx.drawImage(element, listBloc[i].positionX, listBloc[i].positionY);
+            }, false);
+        }
+
         for (let i = 0; i < length * length; i++) {
             let element = new Image();
             element.src = this.getImageSrc(listBloc[i].type);
             element.addEventListener("load", () => {
                 ctx.drawImage(element, listBloc[i].positionX, listBloc[i].positionY);
             }, false);
-            // console.log(listBloc[i]);
         }
+        
     }
 
     //Methode getImageSrc : 
@@ -42,6 +51,7 @@ class RenderElement {
         if(type === "player2") {
             return "assets/img/player-2.jpg";
         }
+        console.log(type)
     }
 
 }

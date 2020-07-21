@@ -1,13 +1,17 @@
 class Player {
 
-  constructor(id, name) {
+  constructor(id, name, sante, degat, actionType) {
     this.id = id;
     this.name = name;
+    this.sante = sante;
+    this.degat = degat;
+    this.actionType = actionType;
+    this.cible = "";
     this.currentId = -1;
-    this.previousWeapon = -1;
-    this.currentWeapon = 1;
+    this.previousWeaponId = -1;
     this.nameWeaponP1 = document.getElementById("name-weapon-p1");
     this.nameWeaponP2 = document.getElementById("name-weapon-p2");
+    this.currentWeapon = new Weapon(1, "lance-pierre", 10);
     this.lifePointP1 = document.getElementById("life-point-p1");
     this.lifePointP2 = document.getElementById("life-point-p2");
     this.attackBtnP1 = document.getElementById("attack-btn-p1");
@@ -70,13 +74,15 @@ class Player {
     listBloc[this.currentId].type = "casevide";
 
     // Dépose l'arme précédente
-    if (this.previousWeapon !== -1) {
-      listBloc[this.currentId].type = `weapon${this.previousWeapon}`;
-      this.previousWeapon = -1;
+    if (this.previousWeaponId !== -1) {
+      listBloc[this.currentId].type = `weapon${this.previousWeaponId}`;
+      this.previousWeaponId = -1;
     }
 
     // Vérification type d'arme
-    this.manageWeapon();
+    if(listBloc[this.currentId - length].type.includes("weapon")) {
+      this.manageWeapon(listBloc[this.currentId - length].type);
+    }
 
     // Action de déplacement
     this.currentId = this.currentId - length;
@@ -92,13 +98,15 @@ class Player {
     listBloc[this.currentId].type = "casevide";
 
     // Dépose l'arme précédente
-    if (this.previousWeapon !== -1) {
-      listBloc[this.currentId].type = `weapon${this.previousWeapon}`;
-      this.previousWeapon = -1;
+    if (this.previousWeaponId !== -1) {
+      listBloc[this.currentId].type = `weapon${this.previousWeaponId}`;
+      this.previousWeaponId = -1;
     }
 
     // Vérification type d'arme
-    this.manageWeapon();
+    if(listBloc[this.currentId + length].type.includes("weapon")) {
+      this.manageWeapon(listBloc[this.currentId + length].type);
+    }
 
     // Action de déplacement
     this.currentId += length;
@@ -114,13 +122,15 @@ class Player {
     listBloc[this.currentId].type = "casevide";
 
     // dépose arme précédente
-    if (this.previousWeapon !== -1) {
-      listBloc[this.currentId].type = `weapon${this.previousWeapon}`;
-      this.previousWeapon = -1;
+    if (this.previousWeaponId !== -1) {
+      listBloc[this.currentId].type = `weapon${this.previousWeaponId}`;
+      this.previousWeaponId = -1;
     }
 
     // Vérif type d'arme
-    this.manageWeapon();
+    if(listBloc[this.currentId - 1].type.includes("weapon")) {
+      this.manageWeapon(listBloc[this.currentId - 1].type);
+    }
 
     // Action de déplacement
     this.currentId -= 1;
@@ -129,6 +139,7 @@ class Player {
     return this.currentId;
   }
 
+
   movePlayerRight() {
     if ((this.currentId + 1) % 10 === 0 || listBloc[this.currentId + 1].type === "obstacle") {
       return;
@@ -136,107 +147,83 @@ class Player {
     listBloc[this.currentId].type = "casevide";
 
     // Dépose l'arme précédente
-    if (this.previousWeapon !== -1) {
-      listBloc[this.currentId].type = `weapon${this.previousWeapon}`;
-      this.previousWeapon = -1;
+    if (this.previousWeaponId !== -1) {
+      listBloc[this.currentId].type = `weapon${this.previousWeaponId}`;
+      this.previousWeaponId = -1;
     }
 
     //Vérification type d'arme
-    this.manageWeapon();
+    if(listBloc[this.currentId + 1].type.includes("weapon")) {
+
+      this.manageWeapon(listBloc[this.currentId + 1].type);
+    }
 
     // Action de déplacement
     this.currentId += 1;
     listBloc[this.currentId].type = `player${this.id}`;
 
+    console.log(listBloc[this.currentId]);
+    console.log(listBloc[this.currentId - 1]);
+
     return this.currentId;
   }
   
-  manageWeapon() {
-    if (listBloc[this.currentId - length].type.includes("weapon")) {
 
-      this.previousWeapon = this.currentWeapon;
 
-      if (listBloc[this.currentId - length].type === "weapon1") {
-        this.currentWeapon = 1;
 
-        if (this.id === 1) {
-          this.nameWeaponP1.innerHTML = "lance-pierre";
-        } else {
-          this.nameWeaponP2.innerHTML = "lance-pierre";
-        }
+  manageWeapon(weaponType) {
+
+      this.previousWeaponId = this.currentWeapon.weaponType;
+
+      if (weaponType === "weapon1") {
+        this.currentWeapon = new Weapon(1, "Lance-pierre", 10);
       }
 
-      if (listBloc[this.currentId - length].type === "weapon2") {
-        this.currentWeapon = 2;
-
-        if (this.id === 1) {
-          this.nameWeaponP1.innerHTML = "Masse";
-        } else {
-          this.nameWeaponP2.innerHTML = "Masse";
-        }
+      if (weaponType === "weapon2") {
+        this.currentWeapon = new Weapon(2, "Masse", 20);
       }
 
-      if (listBloc[this.currentId - length].type === "weapon3") {
-        this.currentWeapon = 3;
-
-        if (this.id === 1) {
-          this.nameWeaponP1.innerHTML = "Arc";
-        } else {
-          this.nameWeaponP2.innerHTML = "Arc";
-        }
+      if (weaponType === "weapon3") {
+        this.currentWeapon = new Weapon(3, "Arc", 30);
       }
 
-      if (listBloc[this.currentId - length].type === "weapon4") {
-        this.currentWeapon = 4;
-
-        if (this.id === 1) {
-          this.nameWeaponP1.innerHTML = "Pistolet-laser";
-        } else {
-          this.nameWeaponP2.innerHTML = "Pistolet-laser";
-        }
-
+      if (weaponType === "weapon4") {
+        this.currentWeapon = new Weapon(4, "Pistolet-laser", 50);
       }
+
+      if (this.id === 1) {
+        this.nameWeaponP1.innerHTML = this.currentWeapon.name;
+      } else {
+        this.nameWeaponP2.innerHTML = this.currentWeapon.name;
+      }
+  }
+
+// ******************* FIGHT ****************** //
+  fightGestion(player1, player2, currentPlayer) {
+
+    //Detection du joueur
+    if(currentPlayer == perso1) {
+      this.cible = player2;
+    } else if(currentPlayer == perso2) {
+      this.cible = player1;
+    }
+
+    while (this.cible.sante > 0 && currentPlayer.sante > 0) {
+      //ATTAQUE
+      this.fightAttack();
+      //DEFENSE
+      this.fightDefense();
     }
   }
 
-
-  fight() {
-
-    // //Combat test
-    // // Attaque
-    // this.attackBtnP1.addEventListener("click", () => {
-
-    //     //Si arme = lance-pierre
-    //     if(this.nameWeaponP1 === "lance-pierre") {
-    //         this.lifePointP2.innerHTML -= 10;
-    //         console.log(this.lifePointP2);
-    //     }
-    //     //Si arme = masse (this.lifePointP2.innerHTML -= 20;)
-    //     //Si arme = Arc (this.lifePointP2.innerHTML -= 30;)
-    //     //Si pistolet-laser = Arc (this.lifePointP2.innerHTML -= 50;)
-    // });
-
-    // this.attackBtnP2.addEventListener("click", () => {
-    //     //Si arme = lance-pierre
-    //     this.lifePointP1.innerHTML -= 10;
-    //     console.log(this.lifePointP1);
-    //     //Si arme = masse (this.lifePointP1.innerHTML -= 20;)
-    //     //Si arme = Arc (this.lifePointP1.innerHTML -= 30;)
-    //     //Si pistolet-laser = Arc (this.lifePointP1.innerHTML -= 50;)
-    // });
-
-    // // //Defense
-    // this.defenseBtnP1.addEventListener("click", () => {
-    //     this.lifePointP1.innerHTML ++;
-    // });
-
-    // this.defenseBtnP2.addEventListener("click", () => {
-    //     this.lifePointP2.innerHTML ++;
-    // });
-    // //end Combat test
+  fightAttack() {
 
   }
 
+  fightDefense() {
+
+  }
+// ******************* END FIGHT ******************* //
 
 
 }
