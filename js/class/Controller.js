@@ -122,6 +122,9 @@ class Controller {
         return;
       }
 
+      // Verification joueur côte à côte -> appel de la méthode startFight (class Controller)
+      this.startFight(currentId);
+
       // Vérification changement de joueur avant 3 click /rencontre d'un obstacle / sorti du plateau
       if ((this.numberClick === 1 || this.numberClick === 2) && (currentId < this.length ||
           listBloc[currentId - this.length].type === "obstacle")) {
@@ -133,9 +136,6 @@ class Controller {
 
       // Appel de la méthode render (class RenderElement)
       renderElement.render(this.ctx, this.length);
-
-      // Verification joueur côte à côte -> appel de la méthode startFight (class Controller)
-      this.startFight(currentId);
     });
 
     //DOWN
@@ -150,6 +150,8 @@ class Controller {
         return;
       }
 
+      this.startFight(currentIdMoveDown);
+
       // Vérification changement de joueur avant 3 click /rencontre d'un obstacle / sorti du plateau
       if ((this.numberClick === 1 || this.numberClick === 2) && (currentIdMoveDown > length * length - length ||
           listBloc[currentIdMoveDown + length].type === "obstacle")) {
@@ -159,16 +161,8 @@ class Controller {
       // Appel de la méthode clickGestion (class Controller)
       this.clickGestion();
 
-      // Verification joueur côte à côte -> lancement du combat avec l'appel de la méthode fight (class Controller)
-      if (listBloc[currentIdMoveDown + this.length].type.includes("player") ||
-        listBloc[currentIdMoveDown + 1].type.includes("player") ||
-        listBloc[currentIdMoveDown - 1].type.includes("player")) {
-        this.fight();
-      }
-
       // Appel de la méthode render (class RenderElement)
       renderElement.render(this.ctx, this.length);
-
     });
 
     //LEFT
@@ -186,22 +180,18 @@ class Controller {
       // Appel de la méthode clickGestion (class Controller)
       this.clickGestion();
 
+      this.startFight(currentIdMoveLeft);
+
       // Vérification changement de joueur avant 3 click /rencontre d'un obstacle / sorti du plateau
       if ((this.numberClick === 1 || this.numberClick === 2) && (currentIdMoveLeft % 10 === 0 ||
           listBloc[currentIdMoveLeft - 1].type === "obstacle")) {
         this.switchPlayer();
       }
 
-      // Verification joueur côte à côte -> lancement du combat avec l'appel de la méthode fight (class Controller)
-      if (listBloc[currentIdMoveLeft - this.length].type.includes("player") ||
-        listBloc[currentIdMoveLeft + this.length].type.includes("player") ||
-        listBloc[currentIdMoveLeft - 1].type.includes("player")) {
-        this.fight();
-      }
-
       // Appel de la méthode render (class RenderElement)
       renderElement.render(this.ctx, this.length);
     });
+
 
     //RIGHT
     this.btnRight.addEventListener("click", () => {
@@ -218,22 +208,16 @@ class Controller {
       // Appel de la méthode clickGestion (class Controller)
       this.clickGestion();
 
+      this.startFight(currentIdMoveRight);
+
       // Vérification changement de joueur avant 3 click /rencontre d'un obstacle / sorti du plateau
       if ((this.numberClick === 1 || this.numberClick === 2) && (currentIdMoveRight % 10 === 9 ||
           listBloc[currentIdMoveRight + 1].type === "obstacle")) {
         this.switchPlayer();
       }
 
-      // Verification joueur côte à côte -> lancement du combat avec l'appel de la méthode fight (class Controller)
-      if (listBloc[currentIdMoveRight + 1].type.includes("player") ||
-        listBloc[currentIdMoveRight + this.length].type.includes("player") ||
-        listBloc[currentIdMoveRight - this.length].type.includes("player")) {
-        this.fight();
-      }
-
       // Appel de la méthode render (class RenderElement)
       renderElement.render(this.ctx, this.length);
-
     });
   }
 
@@ -272,11 +256,33 @@ class Controller {
 
   //StartFight
   startFight(currentId) {
+    let shouldFight = false;
 
-    if (listBloc[currentId - this.length].type.includes("player") ||
-      listBloc[currentId + this.length].type.includes("player") ||
-      listBloc[currentId + 1].type.includes("player") ||
-      listBloc[currentId - 1].type.includes("player")) {
+    if (currentId > this.length) {
+      if (listBloc[currentId - this.length].type.includes("player")) {
+        shouldFight = true;
+      }
+    }
+
+    if (currentId < this.length * this.length - this.length) {
+      if (listBloc[currentId + this.length].type.includes("player")) {
+        shouldFight = true;
+      }
+    }
+
+    if (currentId % this.length !== 0) {
+      if (listBloc[currentId - 1].type.includes("player")) {
+        shouldFight = true;
+      }
+    }
+
+    if (currentId % this.length !== this.length - 1) {
+      if (listBloc[currentId + 1].type.includes("player")) {
+        shouldFight = true;
+      }
+    }
+
+    if (shouldFight) {
       this.fight();
     }
   }
@@ -322,7 +328,7 @@ class Controller {
             return false;
           }
           break;
-          
+
         default:
           break;
       }

@@ -154,16 +154,12 @@ class Player {
 
     //Vérification type d'arme
     if(listBloc[this.currentId + 1].type.includes("weapon")) {
-
       this.manageWeapon(listBloc[this.currentId + 1].type);
     }
 
     // Action de déplacement
     this.currentId += 1;
     listBloc[this.currentId].type = `player${this.id}`;
-
-    console.log(listBloc[this.currentId]);
-    console.log(listBloc[this.currentId - 1]);
 
     return this.currentId;
   }
