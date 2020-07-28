@@ -28,28 +28,28 @@ class RenderElement {
     //- Permet de récuperer la source de l'image
     getImageSrc(type) {
         if (type === "casevide") {
-            return "assets/img/tiles-1.jpg";
+            return "assets/img/tiles.jpg";
         }
         if(type === "obstacle") {
-            return "assets/img/obstacle.png";
+            return "assets/img/obstacles.svg";
         }
         if(type === "weapon1") {
-            return "assets/img/weapon-1.png";
+            return "assets/img/weapon-1.svg";
         }
         if(type === "weapon2") {
-            return "assets/img/weapon-2.png";
+            return "assets/img/weapon-2.svg";
         }
         if(type === "weapon3") {
-            return "assets/img/weapon-3.png";
+            return "assets/img/weapon-3.svg";
         }
         if(type === "weapon4") {
-            return "assets/img/weapon-4.png";
+            return "assets/img/weapon-4.svg";
         }
         if(type === "player1") {
-            return "assets/img/player-1.jpg";
+            return "assets/img/player-1.svg";
         }
         if(type === "player2") {
-            return "assets/img/player-2.jpg";
+            return "assets/img/player-2.svg";
         }
         console.log(type)
     }

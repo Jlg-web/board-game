@@ -1,46 +1,97 @@
 /* global */
 body {
-    font-family: sans-serif;
+  font-family: sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+#fight {
+  height: 100vh;
+  width: 100vw;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  font-size: 60px;
+}
+
+.fight-activate {
+  /* opacity: 1 !important; */
+  animation-duration: 2.5s;
+  animation-name: fightAnim;
+}
+
+.fight p {
+  margin: 0;
+  font-size: 70px;
 }
 
 /* helpers */
 .flex {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .which-player {
-    background-color: #F1F1F1;
+  background-color: #F1F1F1;
 }
 
 .container-global {
-    margin-top: 70px;
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
 }
 
+
 .next-player a {
-    background: #282c2b;
-    border-radius: 6px;
-    color: white;
-    font-size: 15px;
-    text-decoration: none;
-    padding: 1rem 2rem;
-    transition: all .3s ease-in-out;
+  background: #282c2b;
+  border-radius: 6px;
+  color: white;
+  font-size: 15px;
+  text-decoration: none;
+  padding: 1rem 2rem;
+  transition: all .3s ease-in-out;
 }
 
 .game-control {
-    margin-right: 20px;
+  margin-right: 20px;
+}
+
+.game-control img {
+    cursor: pointer;
+    transition: transform .3s;
+}
+
+.game-control img:hover {
+    transform: scale(0.9);
 }
 
 .next-player a:hover {
-    background: #4c4e4d;
+  background: #4c4e4d;
 }
 
 .control-board {
-    margin-left: 40px;
+  margin-left: 40px;
 }
 
 .players {
-    padding: 14px 20px;
+  padding: 14px 20px;
+}
+
+
+@keyframes fightAnim {
+
+  from {
+      opacity: 1;
+      transform: scale(1);
+  }
+
+  to {
+      opacity: 0;
+      transform: scale(2.5);
+  }
+
 }

@@ -11,39 +11,47 @@
 <body>
 
     <!-- Plateau -->
-    <div class="flex">
-        <canvas id="plateau" width="600" height="600"></canvas>
+
+    <div class="global-container">
+        <div id="fight">
+            <p>FIGHT!!!!</p>
+        </div>
+        
+        <div class="flex">
+            <canvas id="plateau" width="600" height="600"></canvas>
+        
+            <div class="control-board">
+                <div class="players player1" id="p1">
+                    <h2>Joueur 1</h2>
+                    <p class="weapon-player">Arme du joueur : <strong id="name-weapon-p1">Epée</strong></p>
+                    <p class="life-point">Points de vie : <strong id="life-point-p1">100</strong></p>
+                    <button id="attack-btn-p1">Attaquer</button>
+                    <button id="defense-btn-p1">Défendre</button>
+                </div>
+            
+                <div class="players player2" id="p2">
+                    <h2>Joueur 2</h2>
+                    <p class="weapon-player">Arme du joueur : <strong id="name-weapon-p2">Epée</strong></p>
+                    <p class="life-point">Points de vie : <strong id="life-point-p2">100</strong></p>
+                    <button id="attack-btn-p2">Attaquer</button>
+                    <button id="defense-btn-p2">Défendre</button>
+                </div>
+            </div>
+        </div>
     
-        <div class="control-board">
-            <div class="players player1" id="p1">
-                <h2>Joueur 1</h2>
-                <p class="weapon-player">Arme du joueur : <strong id="name-weapon-p1">Lance-pierre</strong></p>
-                <p class="life-point">Points de vie : <strong id="life-point-p1">100</strong></p>
-                <button id="attack-btn-p1">Attaquer</button>
-                <button id="defense-btn-p1">Défendre</button>
+        <!-- Control -->
+        <div class="container-global">
+            <div class="game-control">
+                <img id="btn-up" src="assets/img/arrow-top.svg" alt="top">
+                <img id="btn-right" src="assets/img/arrow-right.svg" alt="right">
+                <img id="btn-down" src="assets/img/arrow-bottom.svg" alt="bottom">
+                <img id="btn-left" src="assets/img/arrow-left.svg" alt="left">
+
             </div>
         
-            <div class="players player2" id="p2">
-                <h2>Joueur 2</h2>
-                <p class="weapon-player">Arme du joueur : <strong id="name-weapon-p2">Lance-pierre</strong></p>
-                <p class="life-point">Points de vie : <strong id="life-point-p2">100</strong></p>
-                <button id="attack-btn-p2">Attaquer</button>
-                <button id="defense-btn-p2">Défendre</button>
+            <div class="next-player" id="next-btn">
+                <a href="#">Joueur suivant</a>
             </div>
-        </div>
-    </div>
-
-    <!-- Control -->
-    <div class="container-global">
-        <div class="game-control">
-            <button id="btn-up">Up</button>
-            <button id="btn-down">Down</button>
-            <button id="btn-left">Left</button>
-            <button id="btn-right">Right</button>
-        </div>
-    
-        <div class="next-player" id="next-btn">
-            <a href="#">Joueur suivant</a>
         </div>
     </div>
 

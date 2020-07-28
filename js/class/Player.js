@@ -1,23 +1,17 @@
 class Player {
 
-  constructor(id, name, sante, degat, actionType) {
+  constructor(id, name, sante) {
     this.id = id;
     this.name = name;
     this.sante = sante;
-    this.degat = degat;
-    this.actionType = actionType;
     this.cible = "";
     this.currentId = -1;
     this.previousWeaponId = -1;
+    this.currentWeapon = new Weapon(1, "sword", 10);
+    // this.player = new Player(1, "Chevalier", 100);
     this.nameWeaponP1 = document.getElementById("name-weapon-p1");
     this.nameWeaponP2 = document.getElementById("name-weapon-p2");
-    this.currentWeapon = new Weapon(1, "lance-pierre", 10);
-    this.lifePointP1 = document.getElementById("life-point-p1");
-    this.lifePointP2 = document.getElementById("life-point-p2");
-    this.attackBtnP1 = document.getElementById("attack-btn-p1");
-    this.defenseBtnP1 = document.getElementById("defense-btn-p1");
-    this.attackBtnP2 = document.getElementById("attack-btn-p2");
-    this.defenseBtnP2 = document.getElementById("defense-btn-p2");
+    this.lifePoint = document.getElementById(`life-point-p${id}`);
   }
 
   createPlayer(length, playerNumber) {
@@ -139,7 +133,6 @@ class Player {
     return this.currentId;
   }
 
-
   movePlayerRight() {
     if ((this.currentId + 1) % 10 === 0 || listBloc[this.currentId + 1].type === "obstacle") {
       return;
@@ -164,27 +157,24 @@ class Player {
     return this.currentId;
   }
   
-
-
-
   manageWeapon(weaponType) {
-
+     
       this.previousWeaponId = this.currentWeapon.weaponType;
 
       if (weaponType === "weapon1") {
-        this.currentWeapon = new Weapon(1, "Lance-pierre", 10);
+        this.currentWeapon = new Weapon(1, "Epée", 10);
       }
 
       if (weaponType === "weapon2") {
-        this.currentWeapon = new Weapon(2, "Masse", 20);
+        this.currentWeapon = new Weapon(2, "Arbalete", 20);
       }
 
       if (weaponType === "weapon3") {
-        this.currentWeapon = new Weapon(3, "Arc", 30);
+        this.currentWeapon = new Weapon(3, "Masse", 30);
       }
 
       if (weaponType === "weapon4") {
-        this.currentWeapon = new Weapon(4, "Pistolet-laser", 50);
+        this.currentWeapon = new Weapon(4, "Poison", 50);
       }
 
       if (this.id === 1) {
@@ -192,34 +182,12 @@ class Player {
       } else {
         this.nameWeaponP2.innerHTML = this.currentWeapon.name;
       }
+
   }
 
 // ******************* FIGHT ****************** //
-  fightGestion(player1, player2, currentPlayer) {
-
-    //Detection du joueur
-    if(currentPlayer == perso1) {
-      this.cible = player2;
-    } else if(currentPlayer == perso2) {
-      this.cible = player1;
-    }
-
-    while (this.cible.sante > 0 && currentPlayer.sante > 0) {
-      //ATTAQUE
-      this.fightAttack();
-      //DEFENSE
-      this.fightDefense();
-    }
-  }
-
-  fightAttack() {
-
-  }
-
-  fightDefense() {
-
-  }
-// ******************* END FIGHT ******************* //
-
-
+handleDamage(damage) {
+  this.lifePoint.innerHTML -= damage;
+}
+// ****************** END FIGHT ******************* //
 }

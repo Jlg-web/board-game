@@ -18,76 +18,26 @@ class Controller {
     this.btnDown = document.getElementById("btn-down");
     this.btnLeft = document.getElementById("btn-left");
     this.btnRight = document.getElementById("btn-right");
-    this.design1 = "assets/img/player-1.jpg";
-    this.design2 = "assets/img/player-2.jpg";
+    this.design1 = "assets/img/player-1.svg";
+    this.design2 = "assets/img/player-2.svg";
     this.designPlayers = "";
     this.players = [];
-
-    this.lifePointP1 = document.getElementById("life-point-p1");
-    this.lifePointP2 = document.getElementById("life-point-p2");
-    this.attackBtnP1 = document.getElementById("attack-btn-p1");
-    this.defenseBtnP1 = document.getElementById("defense-btn-p1");
-    this.attackBtnP2 = document.getElementById("attack-btn-p2");
-    this.defenseBtnP2 = document.getElementById("defense-btn-p2");
   }
 
 
   // Méthode init executée au lancement du jeu
   // Construction des objets à partir des différentes class
   init() {
-
-
-
-    //Combat 
-    //Attaque
-    // this.attackBtnP1.addEventListener("click", () => {
-    //   //Si arme = lance-pierre
-    //   // this.lifePointP2.innerHTML -= weapon1.damage;
-    //   // console.log(this.lifePointP2);
-
-
-    //   //Si arme = masse (this.lifePointP2.innerHTML -= 20;)
-    //   //Si arme = Arc (this.lifePointP2.innerHTML -= 30;)
-    //   //Si pistolet-laser = Arc (this.lifePointP2.innerHTML -= 50;)
-    // });
-
-    // this.attackBtnP2.addEventListener("click", () => {
-    //   //Si l'arme courante du joueur est le lance-pierre
-    //   this.lifePointP1.innerHTML -= weapon1.damage;
-    //   console.log(this.lifePointP1);
-    //   //Si l'arme courante du joueur est la masse (this.lifePointP1.innerHTML -= weapon2.damage;)
-    //   //Si l'arme courante du joueur est l'arc (this.lifePointP1.innerHTML -= weapon3.damage;)
-    //   //Si l'arme courante du joueur est le pistolet laser (this.lifePointP1.innerHTML -= weapon4.damage;)
-    // });
-
-
-    // //Defense
-    // this.defenseBtnP1.addEventListener("click", () => {
-    //   this.lifePointP1.innerHTML++;
-    // });
-
-    // this.defenseBtnP2.addEventListener("click", () => {
-    //   this.lifePointP2.innerHTML++;
-    // });
-    //end Combat test
-
-
-
-
-
-
-
-
     //Création Map
     const map = new Map();
     map.createMap(this.ctx, listBloc, this.length, this.widthMax, this.heightMax, this.sizeBloc, this.numberBlocWidth);
 
     //Création joueurs
-    const player1 = new Player(1, "Chevalier");
+    const player1 = new Player(1, "Chevalier", 100);
     player1.createPlayer(this.length, 1);
     this.players.push(player1);
 
-    const player2 = new Player(2, "Ninja");
+    const player2 = new Player(2, "Ninja", 100);
     player2.createPlayer(this.length, 2);
     this.players.push(player2);
 
@@ -96,7 +46,7 @@ class Controller {
     obstacle.createObstacle(this.length);
 
     //Création Armes
-    const weapon1 = new Weapon(1, "lance-pierre", 10);
+    // const weapon1 = new Weapon(1, "lance-pierre", 10);
     Weapon.createWeapons(this.length);
 
     //Création render
@@ -283,12 +233,30 @@ class Controller {
     }
 
     if (shouldFight) {
-      this.fight();
-    }
-  }
+      //On lance le combat
+      // this.players[this.currentPlayer].fightGestion();
+      this.players[this.currentPlayer];
 
-  fight() {
-    console.log("fight");
+      //Animation démarrage du combat
+      let txtFight = document.getElementById("fight");
+      txtFight.classList.add("fight-activate");
+
+
+      const player1 = this.players[0];
+      const player2 = this.players[1];
+      const attackBtnP1 = document.getElementById("attack-btn-p1");
+      const defenseBtnP1 = document.getElementById("defense-btn-p1");
+      const attackBtnP2 = document.getElementById("attack-btn-p2");
+      const defenseBtnP2 = document.getElementById("defense-btn-p2");
+
+      attackBtnP1.addEventListener("click", () => {
+        player2.handleDamage(player1.currentWeapon.damage)
+      });
+
+      attackBtnP2.addEventListener("click", () => {
+        player1.handleDamage(player2.currentWeapon.damage)
+      });
+    }
   }
 
   //blockingPlayer
@@ -296,10 +264,14 @@ class Controller {
 
     if (this.numberClick === 0) {
 
+      console.log(listBloc[this.players[this.currentPlayer].currentId - this.length]);
+      console.log(listBloc[this.players[this.currentPlayer].currentId]);
+
+
       switch (playerDirection) {
         case "haut":
           if (this.players[this.currentPlayer].currentId < this.length ||
-            listBloc[this.players[this.currentPlayer].currentId - this.length + 1].type === "obstacle") {
+            listBloc[this.players[this.currentPlayer].currentId - this.length].type === "obstacle") {
             alert("Vous ne pouvez pas aller dans cette direction");
             return false;
           }
@@ -344,4 +316,5 @@ class Controller {
     }
 
   }
+
 }
