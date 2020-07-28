@@ -62,7 +62,7 @@ class Player {
   movePlayerUp(length) {
 
     if (this.currentId - length < 0 || listBloc[this.currentId - length].type === "obstacle") {
-      return;
+      return false;
     }
 
     listBloc[this.currentId].type = "casevide";
@@ -82,13 +82,15 @@ class Player {
     this.currentId = this.currentId - length;
     listBloc[this.currentId].type = `player${this.id}`;
 
-    return this.currentId;
+    return true;
   }
 
   movePlayerDown(length) {
-    if (this.currentId + length > length * length || listBloc[this.currentId + length].type === "obstacle") {
-      return;
+
+    if (this.currentId + length > length * length - 1 || listBloc[this.currentId + length].type === "obstacle") {
+      return false;
     }
+
     listBloc[this.currentId].type = "casevide";
 
     // Dépose l'arme précédente
@@ -106,12 +108,12 @@ class Player {
     this.currentId += length;
     listBloc[this.currentId].type = `player${this.id}`;
 
-    return this.currentId;
+    return true;
   }
 
   movePlayerLeft() {
     if (this.currentId === 0 || (this.currentId - 1) % 10 === 9 || listBloc[this.currentId - 1].type === "obstacle") {
-      return;
+      return false;
     }
     listBloc[this.currentId].type = "casevide";
 
@@ -130,12 +132,12 @@ class Player {
     this.currentId -= 1;
     listBloc[this.currentId].type = `player${this.id}`;
 
-    return this.currentId;
+    return true;
   }
 
   movePlayerRight() {
     if ((this.currentId + 1) % 10 === 0 || listBloc[this.currentId + 1].type === "obstacle") {
-      return;
+      return false;
     }
     listBloc[this.currentId].type = "casevide";
 
@@ -154,7 +156,7 @@ class Player {
     this.currentId += 1;
     listBloc[this.currentId].type = `player${this.id}`;
 
-    return this.currentId;
+    return true;
   }
   
   manageWeapon(weaponType) {

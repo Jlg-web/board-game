@@ -63,8 +63,16 @@ class Controller {
     //Mouvements joueur
     //UP
     this.btnUp.addEventListener("click", () => {
+
       // Récupération de la méthode movePlayerUp dans une variable (class Player)
-      let currentId = this.players[this.currentPlayer].movePlayerUp(this.length);
+      const moveResult = this.players[this.currentPlayer].movePlayerUp(this.length);
+
+      if (!moveResult && this.numberClick === 0) {
+        alert("Impossible d'aller dans cette direction");
+        return;
+      }
+
+      const currentId = this.players[this.currentPlayer].currentId;
 
       // Appel méthode blockingPlayer (class Controller)
       const result = this.blockingPlayer("haut");
@@ -75,24 +83,36 @@ class Controller {
       // Verification joueur côte à côte -> appel de la méthode startFight (class Controller)
       this.startFight(currentId);
 
+      // Appel méthode clickGestion (class Controller)
+      this.clickGestion();
+
       // Vérification changement de joueur avant 3 click /rencontre d'un obstacle / sorti du plateau
       if ((this.numberClick === 1 || this.numberClick === 2) && (currentId < this.length ||
           listBloc[currentId - this.length].type === "obstacle")) {
         this.switchPlayer();
       }
 
-      // Appel méthode clickGestion (class Controller)
-      this.clickGestion();
-
       // Appel de la méthode render (class RenderElement)
       renderElement.render(this.ctx, this.length);
     });
+
+
+
+
+
 
     //DOWN
     this.btnDown.addEventListener("click", () => {
 
       // Récupération de la méthode currentIdMoveDown dans une variable (class Player)
-      let currentIdMoveDown = this.players[this.currentPlayer].movePlayerDown(this.length);
+      const moveResult = this.players[this.currentPlayer].movePlayerDown(this.length);
+
+      if (!moveResult && this.numberClick === 0) {
+        alert("Impossible d'aller dans cette direction");
+        return;
+      }
+
+      const currentId = this.players[this.currentPlayer].currentId;
 
       // Appel méthode blockingPlayer (class Controller)
       const result = this.blockingPlayer("bas");
@@ -100,16 +120,16 @@ class Controller {
         return;
       }
 
-      this.startFight(currentIdMoveDown);
-
-      // Vérification changement de joueur avant 3 click /rencontre d'un obstacle / sorti du plateau
-      if ((this.numberClick === 1 || this.numberClick === 2) && (currentIdMoveDown > length * length - length ||
-          listBloc[currentIdMoveDown + length].type === "obstacle")) {
-        this.switchPlayer();
-      }
+      this.startFight(currentId);
 
       // Appel de la méthode clickGestion (class Controller)
       this.clickGestion();
+
+      // Vérification changement de joueur avant 3 click /rencontre d'un obstacle / sorti du plateau
+      if ((this.numberClick === 1 || this.numberClick === 2) && (currentId > this.length * this.length - this.length ||
+          listBloc[currentId + this.length].type === "obstacle")) {
+        this.switchPlayer();
+      }
 
       // Appel de la méthode render (class RenderElement)
       renderElement.render(this.ctx, this.length);
@@ -118,8 +138,15 @@ class Controller {
     //LEFT
     this.btnLeft.addEventListener("click", () => {
 
-      // Récupération de la méthode currentIdMoveLeft dans une variable (class Player)
-      let currentIdMoveLeft = this.players[this.currentPlayer].movePlayerLeft(this.length);
+      // Récupération de la méthode currentIdMoveDown dans une variable (class Player)
+      const moveResult = this.players[this.currentPlayer].movePlayerLeft(this.length);
+
+      if (!moveResult && this.numberClick === 0) {
+        alert("Impossible d'aller dans cette direction");
+        return;
+      }
+
+      const currentId = this.players[this.currentPlayer].currentId;
 
       // Appel méthode blockingPlayer (class Controller)
       const result = this.blockingPlayer("gauche");
@@ -130,11 +157,11 @@ class Controller {
       // Appel de la méthode clickGestion (class Controller)
       this.clickGestion();
 
-      this.startFight(currentIdMoveLeft);
+      this.startFight(currentId);
 
       // Vérification changement de joueur avant 3 click /rencontre d'un obstacle / sorti du plateau
-      if ((this.numberClick === 1 || this.numberClick === 2) && (currentIdMoveLeft % 10 === 0 ||
-          listBloc[currentIdMoveLeft - 1].type === "obstacle")) {
+      if ((this.numberClick === 1 || this.numberClick === 2) && (currentId % 10 === 0 ||
+          listBloc[currentId - 1].type === "obstacle")) {
         this.switchPlayer();
       }
 
@@ -147,7 +174,14 @@ class Controller {
     this.btnRight.addEventListener("click", () => {
 
       // Récupération de la méthode currentIdMoveRight dans une variable (class Player)
-      let currentIdMoveRight = this.players[this.currentPlayer].movePlayerRight(this.length);
+      const moveResult = this.players[this.currentPlayer].movePlayerRight(this.length);
+
+      if (!moveResult && this.numberClick === 0) {
+        alert("Impossible d'aller dans cette direction");
+        return;
+      }
+
+      const currentId = this.players[this.currentPlayer].currentId;
 
       // Appel méthode blockingPlayer (class Controller)
       const result = this.blockingPlayer("droite");
@@ -158,11 +192,11 @@ class Controller {
       // Appel de la méthode clickGestion (class Controller)
       this.clickGestion();
 
-      this.startFight(currentIdMoveRight);
+      this.startFight(currentId);
 
       // Vérification changement de joueur avant 3 click /rencontre d'un obstacle / sorti du plateau
-      if ((this.numberClick === 1 || this.numberClick === 2) && (currentIdMoveRight % 10 === 9 ||
-          listBloc[currentIdMoveRight + 1].type === "obstacle")) {
+      if ((this.numberClick === 1 || this.numberClick === 2) && (currentId % 10 === 9 ||
+          listBloc[currentId + 1].type === "obstacle")) {
         this.switchPlayer();
       }
 
@@ -263,58 +297,13 @@ class Controller {
   blockingPlayer(playerDirection) {
 
     if (this.numberClick === 0) {
-
-      console.log(listBloc[this.players[this.currentPlayer].currentId - this.length]);
-      console.log(listBloc[this.players[this.currentPlayer].currentId]);
-
-
-      switch (playerDirection) {
-        case "haut":
-          if (this.players[this.currentPlayer].currentId < this.length ||
-            listBloc[this.players[this.currentPlayer].currentId - this.length].type === "obstacle") {
-            alert("Vous ne pouvez pas aller dans cette direction");
-            return false;
-          }
-          break;
-
-        case "bas":
-          if (this.players[this.currentPlayer].currentId > this.length * this.length - this.length ||
-            listBloc[this.players[this.currentPlayer].currentId + this.length].type === "obstacle") {
-            alert("Vous ne pouvez pas aller dans cette direction");
-            return false;
-          }
-          break;
-
-        case "droite":
-          if (this.players[this.currentPlayer].currentId % 10 === 9 ||
-            listBloc[this.players[this.currentPlayer].currentId + 1].type === "obstacle") {
-            alert("Vous ne pouvez pas aller dans cette direction");
-            return false;
-          }
-          break;
-
-        case "gauche":
-          if (this.players[this.currentPlayer].currentId % 10 === 0 ||
-            listBloc[this.players[this.currentPlayer].currentId - 1].type === "obstacle") {
-            alert("Vous ne pouvez pas aller dans cette direction");
-            return false;
-          }
-          break;
-
-        default:
-          break;
-      }
-
       this.playerDirection = playerDirection;
-      return true;
     } else {
       if (this.playerDirection !== playerDirection) {
         alert("Vous n'avez pas le droit d'aller dans cette direction");
         return false;
       }
-      return true;
     }
-
+    return true;
   }
-
 }
