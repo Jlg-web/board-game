@@ -279,28 +279,39 @@ class Controller {
       const defenseBtnP1 = document.getElementById("defense-btn-p1");
       const attackBtnP2 = document.getElementById("attack-btn-p2");
       const defenseBtnP2 = document.getElementById("defense-btn-p2");
+      const overlay = document.getElementById("overlay");
+      const txtOverlay = document.getElementById("text-overlay");
+      const imgOverlayP1 = document.getElementById("img-overlay-p1");
+      const imgOverlayP2 = document.getElementById("img-overlay-p2");
+
 
       attackBtnP1.addEventListener("click", () => {
         if(this.currentPlayer === 1) {
-          alert("C'est au joueur 2 de jouer");
+          alert("C'est au joueur 2 de jouer.");
           return;
         }
         const hasLost = player2.handleDamage(player1.currentWeapon.damage);
         if(hasLost) {
-          console.log("le joueur 1 a gagné");
+          overlay.style.display = "flex";
+          txtOverlay.innerHTML = "Le joueur 1 remporte la partie !";
+          imgOverlayP1.src = "assets/img/display-p1.svg";
+          imgOverlayP2.style.display = "none";
+          return;
         }
         this.switchPlayer();
       });
 
       attackBtnP2.addEventListener("click", () => {
         if(this.currentPlayer === 0) {
-          alert("C'est au joueur 1 de jouer");
+          alert("C'est au joueur 1 de jouer.");
           return;
         }
-
         const hasLost = player1.handleDamage(player2.currentWeapon.damage);
         if(hasLost) {
-          console.log("le joueur 2 a gagné");
+          overlay.style.display = "flex";
+          txtOverlay.innerHTML = "Le joueur 2 remporte la partie !";
+          imgOverlayP2.src = "assets/img/display-p2.svg";
+          imgOverlayP1.style.display = "none";
           return;
         }
         this.switchPlayer();
@@ -308,7 +319,7 @@ class Controller {
 
       defenseBtnP1.addEventListener("click", () => {
         if(this.currentPlayer === 1) {
-          alert("C'est au joueur 2 de jouer");
+          alert("C'est au joueur 2 de jouer.");
           return;
         }
         player1.handleDefense();
@@ -317,7 +328,7 @@ class Controller {
 
       defenseBtnP2.addEventListener("click", () => {
         if(this.currentPlayer === 0) {
-          alert("C'est au joueur 1 de jouer");
+          alert("C'est au joueur 1 de jouer.");
           return;
         }
         player2.handleDefense();

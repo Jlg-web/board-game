@@ -198,7 +198,7 @@ class Player {
     }
 
     this.lifePoint.innerHTML = this.score;
-    if(this.score === 0) {
+    if(this.score <= 0) {
       return true;
     }
     return false;

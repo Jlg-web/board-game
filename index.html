@@ -11,6 +11,13 @@
 <body>
 
   <!-- Plateau -->
+  <div id="overlay">
+    <div id="content-overlay">
+      <img id="img-overlay-p1" src="#" alt="player">
+      <img id="img-overlay-p2" src="#" alt="player">
+      <p id="text-overlay"></p>
+    </div>
+  </div>
 
   <div class="global-container">
     <div id="fight">
@@ -23,7 +30,7 @@
       <div class="control-board">
         <div class="player1 medium-padding" id="p1">
           <div class="flex align-flex justify-between">
-              <h2>Joueur 1</h2>
+              <h2>Ogre</h2>
               <img src="assets/img/display-p1.svg" alt="p1">
           </div>
           <p class="weapon-player">Arme du joueur : <strong id="name-weapon-p1">Epée</strong></p>
@@ -34,7 +41,7 @@
 
         <div class="player2 medium-padding" id="p2">
             <div class="flex align-flex justify-between">
-                <h2>Joueur 2</h2>
+                <h2>Chevalier</h2>
                 <img src="assets/img/display-p2.svg" alt="p2">
             </div>
           <p class="weapon-player">Arme du joueur : <strong id="name-weapon-p2">Epée</strong></p>
@@ -44,7 +51,7 @@
         </div>
 
         <!-- Btn open modal -->
-        <button id="btn-show-rule">Afficher la règle du jeu</button>
+        <button id="btn-show-rule">Afficher la regle du jeu</button>
 
         <!-- Modal -->
         <div class="medium-padding modal" id="myModal">
