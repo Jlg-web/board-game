@@ -2,68 +2,95 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-    <!-- Plateau -->
+  <!-- Plateau -->
 
-    <div class="global-container">
-        <div id="fight">
-            <p>FIGHT!!!!</p>
-        </div>
-        
-        <div class="flex">
-            <canvas id="plateau" width="600" height="600"></canvas>
-        
-            <div class="control-board">
-                <div class="players player1" id="p1">
-                    <h2>Joueur 1</h2>
-                    <p class="weapon-player">Arme du joueur : <strong id="name-weapon-p1">Epée</strong></p>
-                    <p class="life-point">Points de vie : <strong id="life-point-p1">100</strong></p>
-                    <button id="attack-btn-p1">Attaquer</button>
-                    <button id="defense-btn-p1">Défendre</button>
-                </div>
-            
-                <div class="players player2" id="p2">
-                    <h2>Joueur 2</h2>
-                    <p class="weapon-player">Arme du joueur : <strong id="name-weapon-p2">Epée</strong></p>
-                    <p class="life-point">Points de vie : <strong id="life-point-p2">100</strong></p>
-                    <button id="attack-btn-p2">Attaquer</button>
-                    <button id="defense-btn-p2">Défendre</button>
-                </div>
-            </div>
-        </div>
-    
-        <!-- Control -->
-        <div class="container-global">
-            <div class="game-control">
-                <img id="btn-up" src="assets/img/arrow-top.svg" alt="top">
-                <img id="btn-right" src="assets/img/arrow-right.svg" alt="right">
-                <img id="btn-down" src="assets/img/arrow-bottom.svg" alt="bottom">
-                <img id="btn-left" src="assets/img/arrow-left.svg" alt="left">
-
-            </div>
-        
-            <div class="next-player" id="next-btn">
-                <a href="#">Joueur suivant</a>
-            </div>
-        </div>
+  <div class="global-container">
+    <div id="fight">
+      <p>FIGHT!!!!</p>
     </div>
 
-    <!-- Script -->
-    <script src="js/class/Map.js"></script>
-    <script src="js/class/RenderElement.js"></script>
-    <script src="js/class/RandomElement.js"></script>
-    <script src="js/class/Obstacle.js"></script>
-    <script src="js/class/Weapon.js"></script>
-    <script src="js/class/Player.js"></script>
-    <script src="js/class/Controller.js"></script>
-    <script src="js/init.js"></script>
+    <div class="flex game display">
+      <canvas id="plateau" width="600" height="600"></canvas>
+
+      <div class="control-board">
+        <div class="player1 medium-padding" id="p1">
+          <div class="flex align-flex justify-between">
+              <h2>Joueur 1</h2>
+              <img src="assets/img/display-p1.svg" alt="p1">
+          </div>
+          <p class="weapon-player">Arme du joueur : <strong id="name-weapon-p1">Epée</strong></p>
+          <p class="life-point">Points de vie : <strong id="life-point-p1">100</strong></p>
+          <button class="grey" id="attack-btn-p1">Attaquer</button>
+          <button class="grey" id="defense-btn-p1">Défendre</button>
+        </div>
+
+        <div class="player2 medium-padding" id="p2">
+            <div class="flex align-flex justify-between">
+                <h2>Joueur 2</h2>
+                <img src="assets/img/display-p2.svg" alt="p2">
+            </div>
+          <p class="weapon-player">Arme du joueur : <strong id="name-weapon-p2">Epée</strong></p>
+          <p class="life-point">Points de vie : <strong id="life-point-p2">100</strong></p>
+          <button class="grey" id="attack-btn-p2">Attaquer</button>
+          <button class="grey" id="defense-btn-p2">Défendre</button>
+        </div>
+
+        <!-- Btn open modal -->
+        <button id="btn-show-rule">Afficher la règle du jeu</button>
+
+        <!-- Modal -->
+        <div class="medium-padding modal" id="myModal">
+          <!-- Modal content -->
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Règles du jeu</h2>
+            <p>Utilise les flèches de directionnelles pour te déplacer sur la map, récupère des armes et bat ton adversaire.</p>
+            <p>Lors d'un combat, chaque joueur attaque à son tour. Suivant l'arme que possède le joueur, les dégât sont plus ou moins importants.
+               Lorque les points de vie d'un joueur tombent à 0, la partie se termine. 
+            </p>
+            <p>Chaque joueur démarre avec 100 points de vie.</p>
+            <h4>Puissance des armes :</h4>
+            <p><strong>Épée:</strong> 10 points de dégâts</p>
+            <p><strong>Arbalete:</strong> 20 points de dégâts</p>
+            <p><strong>Masse:</strong> 30 points de dégâts</p>
+            <p><strong>Poison: </strong>50 points de dégâts</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Control -->
+    <div class="container-global" id="play">
+      <div class="game-control">
+        <img id="btn-up" src="assets/img/arrow-top.svg" alt="top">
+        <img id="btn-right" src="assets/img/arrow-right.svg" alt="right">
+        <img id="btn-down" src="assets/img/arrow-bottom.svg" alt="bottom">
+        <img id="btn-left" src="assets/img/arrow-left.svg" alt="left">
+      </div>
+      <div class="next-player" id="next-btn">
+        <a href="#">Joueur suivant</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script src="js/class/Map.js"></script>
+  <script src="js/class/RenderElement.js"></script>
+  <script src="js/class/RandomElement.js"></script>
+  <script src="js/class/Obstacle.js"></script>
+  <script src="js/class/Weapon.js"></script>
+  <script src="js/class/Player.js"></script>
+  <script src="js/class/Controller.js"></script>
+  <script src="js/init.js"></script>
 </body>
 
 </html>

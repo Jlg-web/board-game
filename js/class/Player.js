@@ -8,10 +8,12 @@ class Player {
     this.currentId = -1;
     this.previousWeaponId = -1;
     this.currentWeapon = new Weapon(1, "sword", 10);
-    // this.player = new Player(1, "Chevalier", 100);
     this.nameWeaponP1 = document.getElementById("name-weapon-p1");
     this.nameWeaponP2 = document.getElementById("name-weapon-p2");
     this.lifePoint = document.getElementById(`life-point-p${id}`);
+    this.score = 100;
+    this.hasDefense = false;
+
   }
 
   createPlayer(length, playerNumber) {
@@ -74,7 +76,7 @@ class Player {
     }
 
     // Vérification type d'arme
-    if(listBloc[this.currentId - length].type.includes("weapon")) {
+    if (listBloc[this.currentId - length].type.includes("weapon")) {
       this.manageWeapon(listBloc[this.currentId - length].type);
     }
 
@@ -100,7 +102,7 @@ class Player {
     }
 
     // Vérification type d'arme
-    if(listBloc[this.currentId + length].type.includes("weapon")) {
+    if (listBloc[this.currentId + length].type.includes("weapon")) {
       this.manageWeapon(listBloc[this.currentId + length].type);
     }
 
@@ -124,7 +126,7 @@ class Player {
     }
 
     // Vérif type d'arme
-    if(listBloc[this.currentId - 1].type.includes("weapon")) {
+    if (listBloc[this.currentId - 1].type.includes("weapon")) {
       this.manageWeapon(listBloc[this.currentId - 1].type);
     }
 
@@ -148,7 +150,7 @@ class Player {
     }
 
     //Vérification type d'arme
-    if(listBloc[this.currentId + 1].type.includes("weapon")) {
+    if (listBloc[this.currentId + 1].type.includes("weapon")) {
       this.manageWeapon(listBloc[this.currentId + 1].type);
     }
 
@@ -158,38 +160,52 @@ class Player {
 
     return true;
   }
-  
+
   manageWeapon(weaponType) {
-     
-      this.previousWeaponId = this.currentWeapon.weaponType;
+    this.previousWeaponId = this.currentWeapon.weaponType;
 
-      if (weaponType === "weapon1") {
-        this.currentWeapon = new Weapon(1, "Epée", 10);
-      }
+    if (weaponType === "weapon1") {
+      this.currentWeapon = new Weapon(1, "Epée", 10);
+    }
 
-      if (weaponType === "weapon2") {
-        this.currentWeapon = new Weapon(2, "Arbalete", 20);
-      }
+    if (weaponType === "weapon2") {
+      this.currentWeapon = new Weapon(2, "Arbalete", 20);
+    }
 
-      if (weaponType === "weapon3") {
-        this.currentWeapon = new Weapon(3, "Masse", 30);
-      }
+    if (weaponType === "weapon3") {
+      this.currentWeapon = new Weapon(3, "Masse", 30);
+    }
 
-      if (weaponType === "weapon4") {
-        this.currentWeapon = new Weapon(4, "Poison", 50);
-      }
+    if (weaponType === "weapon4") {
+      this.currentWeapon = new Weapon(4, "Poison", 50);
+    }
 
-      if (this.id === 1) {
-        this.nameWeaponP1.innerHTML = this.currentWeapon.name;
-      } else {
-        this.nameWeaponP2.innerHTML = this.currentWeapon.name;
-      }
-
+    if (this.id === 1) {
+      this.nameWeaponP1.innerHTML = this.currentWeapon.name;
+    } else {
+      this.nameWeaponP2.innerHTML = this.currentWeapon.name;
+    }
   }
 
-// ******************* FIGHT ****************** //
-handleDamage(damage) {
-  this.lifePoint.innerHTML -= damage;
-}
-// ****************** END FIGHT ******************* //
+  // ******************* FIGHT ****************** //
+  handleDamage(damage) {
+
+    if(this.hasDefense) {
+      this.score = this.score - damage / 2;
+      this.hasDefense = false;
+    } else {
+      this.score = this.score - damage;
+    }
+
+    this.lifePoint.innerHTML = this.score;
+    if(this.score === 0) {
+      return true;
+    }
+    return false;
+  }
+
+  handleDefense() {
+    this.hasDefense = true;
+  }
+
 }

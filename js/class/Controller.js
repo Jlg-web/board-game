@@ -55,6 +55,8 @@ class Controller {
 
     this.whichPlayerStarts();
 
+    this.displayModal();
+
     this.nextBtn.addEventListener("click", () => {
       this.switchPlayer();
       this.currentPlayer = (this.currentPlayer++);
@@ -95,11 +97,6 @@ class Controller {
       // Appel de la méthode render (class RenderElement)
       renderElement.render(this.ctx, this.length);
     });
-
-
-
-
-
 
     //DOWN
     this.btnDown.addEventListener("click", () => {
@@ -168,7 +165,6 @@ class Controller {
       // Appel de la méthode render (class RenderElement)
       renderElement.render(this.ctx, this.length);
     });
-
 
     //RIGHT
     this.btnRight.addEventListener("click", () => {
@@ -267,14 +263,15 @@ class Controller {
     }
 
     if (shouldFight) {
-      //On lance le combat
-      // this.players[this.currentPlayer].fightGestion();
+      //On fait disparaitre les flèches
+      const controlGame = document.getElementById("play");
+      controlGame.classList.add("display-none");
+
       this.players[this.currentPlayer];
 
       //Animation démarrage du combat
       let txtFight = document.getElementById("fight");
       txtFight.classList.add("fight-activate");
-
 
       const player1 = this.players[0];
       const player2 = this.players[1];
@@ -284,12 +281,50 @@ class Controller {
       const defenseBtnP2 = document.getElementById("defense-btn-p2");
 
       attackBtnP1.addEventListener("click", () => {
-        player2.handleDamage(player1.currentWeapon.damage)
+        if(this.currentPlayer === 1) {
+          alert("C'est au joueur 2 de jouer");
+          return;
+        }
+        const hasLost = player2.handleDamage(player1.currentWeapon.damage);
+        if(hasLost) {
+          console.log("le joueur 1 a gagné");
+        }
+        this.switchPlayer();
       });
 
       attackBtnP2.addEventListener("click", () => {
-        player1.handleDamage(player2.currentWeapon.damage)
+        if(this.currentPlayer === 0) {
+          alert("C'est au joueur 1 de jouer");
+          return;
+        }
+
+        const hasLost = player1.handleDamage(player2.currentWeapon.damage);
+        if(hasLost) {
+          console.log("le joueur 2 a gagné");
+          return;
+        }
+        this.switchPlayer();
       });
+
+      defenseBtnP1.addEventListener("click", () => {
+        if(this.currentPlayer === 1) {
+          alert("C'est au joueur 2 de jouer");
+          return;
+        }
+        player1.handleDefense();
+        this.switchPlayer();
+      });
+
+      defenseBtnP2.addEventListener("click", () => {
+        if(this.currentPlayer === 0) {
+          alert("C'est au joueur 1 de jouer");
+          return;
+        }
+        player2.handleDefense();
+        this.switchPlayer();
+      });
+
+
     }
   }
 
@@ -305,5 +340,27 @@ class Controller {
       }
     }
     return true;
+  }
+
+  //Modal
+  displayModal() {
+    //Modal
+    const modal = document.getElementById("myModal");
+    const btnShowRule = document.getElementById("btn-show-rule");
+    const span = document.getElementsByClassName("close")[0];
+
+    btnShowRule.addEventListener("click", () => {
+      modal.style.display = "flex";
+    });
+
+    span.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+
+    window.addEventListener("click", (e) => {
+      if (e.target == modal) {
+        modal.style.display = "none";
+      }
+    });
   }
 }

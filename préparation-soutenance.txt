@@ -1,0 +1,16 @@
+1 Contexte du projet
+    - Jeu tour par tour en js
+    - Respect d'un cahier des charges
+    - orienté objet
+
+2 Javascript Orienté Objet
+    - La poo permet une meilleure organisation et un code réutilisable
+    - Eviter les répétitions
+    - Utilisation de classes = caractéristique de l'objet
+    - Création des objets grâce aux classe = On instancie un objet à partir de la classe
+    - Utilisation de méthodes et propriétés à l'intérieur des classes
+    - méthode "spéciale" constrcutor qui sera appelée au moment de l'instanciation d'un objet
+    - Le mot clé this est utilisé dans une méthode afin de référencer l'instance sur laquelle est executée cette méthode
+
+3 Démonstration du code + test du jeu
+    

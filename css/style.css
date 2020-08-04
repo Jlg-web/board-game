@@ -5,6 +5,55 @@ body {
   margin: 0;
 }
 
+h1,
+h2,
+h4 {
+  margin: 0;
+  padding: 0;
+}
+
+.test-img {
+  background: #e2e2e2;
+  height: 40px;
+  width: 40px;
+  align-items: center;
+}
+
+.global-container {
+  margin: 15px 0 0 15px;
+}
+
+.medium-padding {
+  padding: 20px;
+}
+
+.display-none {
+  display: none !important;
+}
+
+button {
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  transition: all .3s ease-in-out;
+}
+
+button.grey:hover {
+  background: #4c4e4d;
+}
+
+#btn-show-rule {
+  border: 2px solid #0a95ca;
+  background: inherit;
+  color: #0a95ca;
+}
+
+button.grey {
+  background: #282c2b;
+}
+
 #fight {
   height: 100vh;
   width: 100vw;
@@ -19,7 +68,6 @@ body {
 }
 
 .fight-activate {
-  /* opacity: 1 !important; */
   animation-duration: 2.5s;
   animation-name: fightAnim;
 }
@@ -33,6 +81,14 @@ body {
 .flex {
   display: flex;
   flex-direction: row;
+}
+
+.align-flex {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
 }
 
 .which-player {
@@ -61,12 +117,12 @@ body {
 }
 
 .game-control img {
-    cursor: pointer;
-    transition: transform .3s;
+  cursor: pointer;
+  transition: transform .3s;
 }
 
 .game-control img:hover {
-    transform: scale(0.9);
+  transform: scale(0.9);
 }
 
 .next-player a:hover {
@@ -74,24 +130,93 @@ body {
 }
 
 .control-board {
-  margin-left: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 40px 0 40px 40px;
 }
 
-.players {
+.game-display {
   padding: 14px 20px;
 }
 
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+  padding: 0;
+}
+
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  max-width: 680px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+  padding: 38px;
+}
+
+.modal-content p {
+  line-height: 22px;
+}
+
+.close {
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+  right: 22px;
+  top: 11px;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
 
 @keyframes fightAnim {
 
   from {
-      opacity: 1;
-      transform: scale(1);
+    opacity: 1;
+    transform: scale(1);
   }
 
   to {
-      opacity: 0;
-      transform: scale(2.5);
+    opacity: 0;
+    transform: scale(2.5);
   }
 
+}
+
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0
+  }
+
+  to {
+    top: 0;
+    opacity: 1
+  }
 }
